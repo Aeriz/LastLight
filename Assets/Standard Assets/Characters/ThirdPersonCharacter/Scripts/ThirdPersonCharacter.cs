@@ -43,7 +43,8 @@ namespace UnityStandardAssets.Characters.ThirdPerson
         bool dashBool = false;
         public float dashSpeed = 20;
         float timer = 0;
-
+        Vector3 m_move;
+        public bool devMode = false;
 
         public bool closeMode = false;
         public Transform target;
@@ -72,6 +73,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 
         public void Move(Vector3 move, bool crouch, int jump, bool _dash, bool _float)
         {
+            m_move = move;
             Vector3 temp = move;
             //Debug.Log(m_Rigidbody.velocity);
             dashBool = _dash;
@@ -266,13 +268,24 @@ namespace UnityStandardAssets.Characters.ThirdPerson
         {
             // we implement this function to override the default root motion.
             // this allows us to modify the positional speed before it's applied.
-            if (m_IsGrounded && Time.deltaTime > 0)
+            if (m_IsGrounded && Time.deltaTime > 0 && !devMode)
             {
                 Vector3 v = (m_Animator.deltaPosition * m_MoveSpeedMultiplier) / Time.deltaTime;
 
                 // we preserve the existing y part of the current velocity.
                 v.y = m_Rigidbody.velocity.y;
                 m_Rigidbody.velocity = v;
+            }
+            else
+            {
+
+                Vector3 v = m_move / m_GravityMultiplierFloat;
+
+                // we preserve the existing y part of the current velocity.
+                v.y = m_Rigidbody.velocity.y;
+                m_Rigidbody.velocity = v;
+                
+
             }
 
         }

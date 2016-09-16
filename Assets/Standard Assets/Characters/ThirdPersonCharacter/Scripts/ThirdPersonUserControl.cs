@@ -120,6 +120,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
             m_Move = v * fwd + h * right;
 #if !MOBILE_INPUT
             // walk speed multiplier
+            if (Input.GetKey(KeyCode.LeftAlt) && m_Character.devMode) m_Move *= 5f;
             if (Input.GetKey(KeyCode.LeftAlt)) m_Move *= 0.5f;
 #endif
 			if (Input.GetKey(KeyCode.LeftShift) && m_Character.m_IsGrounded == true)
