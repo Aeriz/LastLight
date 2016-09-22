@@ -8,12 +8,16 @@ public class EnemyScript : MonoBehaviour
     public bool isDead = false;
     public float attackSpeed = 0.5f;
     public int attackDamage = 10;
+    public float aggroRange = 30;
     bool inRange;
     float timer;
+    float checkAggroTimer = 0;
     Health playerHealth;
     GameObject player;
     Rigidbody m_Rigidbody;
     NavMeshAgent nav;
+    public bool aggro = false;
+    public bool attackBool = false;
     //EnemyHealth enemyHealth;
 	// Use this for initialization
 	void Start ()
@@ -29,16 +33,21 @@ public class EnemyScript : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
     {
+       
+        checkEnemyInRange();
+         
 	    if(inRange)
         {
             timer += Time.deltaTime;
         }
-        if(timer >= attackSpeed && inRange && currentHealth > 0)
+        if(timer >= attackSpeed && inRange && currentHealth > 0 && aggro)
         {
             //attack();
+            attackBool = true;
         }
-        if(currentHealth > 0 && playerHealth.currenthealth > 0)
+        if(currentHealth > 0 && playerHealth.currenthealth > 0 && aggro)
         {
+            nav.enabled = true;
             nav.SetDestination(player.transform.position);
         }
         else
@@ -48,6 +57,36 @@ public class EnemyScript : MonoBehaviour
 
 	}
 
+    void checkEnemyInRange()
+    {
+        Collider[] hitColliders = Physics.OverlapSphere(transform.position, aggroRange);
+        int i = 0;
+        while (i<hitColliders.Length)
+        {
+            
+            if(hitColliders[i].tag == "Enemy")
+            {
+                EnemyScript enemy = hitColliders[i].GetComponent<EnemyScript>();
+                if (enemy.aggro)
+                {
+                    aggro = true;
+                    break;
+                }
+            }
+
+            if (hitColliders[i].tag == "Player")
+            {
+                aggro = true;
+                break;
+            }
+            else
+            {
+                aggro = false;
+            }
+            i++;
+        }
+    }
+
     void attack()
     {
         timer = 0;
@@ -55,6 +94,7 @@ public class EnemyScript : MonoBehaviour
         {
             playerHealth.takeDamage(attackDamage);
         }
+        attackBool = false;
     }
 
     void OnTriggerEnter(Collider other)

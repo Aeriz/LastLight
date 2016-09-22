@@ -8,6 +8,7 @@ public class Combat : MonoBehaviour {
     public int lightAttack = 10;
     public int heavyAttack = 20;
     public float radius = 2;
+    float blockRange = 0.7f;
     int j = 0;
 	// Use this for initialization
 	void Start ()
@@ -15,6 +16,7 @@ public class Combat : MonoBehaviour {
         characterActions = new MyCharacterActions();
         characterActions.lightAttack.AddDefaultBinding(Mouse.LeftButton);
         characterActions.heavyAttack.AddDefaultBinding(Mouse.RightButton);
+        characterActions.block.AddDefaultBinding(Key.LeftControl);
 	}
 	
 	// Update is called once per frame
@@ -61,6 +63,37 @@ public class Combat : MonoBehaviour {
                 //Debug.Log(angle);
             }
             i++;
+        }
+    }
+
+    void blockDamage()
+    {
+        GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
+        int i = 0;
+        while(i < enemies.Length)
+        {
+            EnemyScript enemy = enemies[i].GetComponent<EnemyScript>();
+            if(enemy.aggro)
+            {
+                Vector3 targetDir = enemies[i].transform.position - transform.position;
+                float angle = Vector3.Angle(targetDir, transform.forward);
+                //dot = Vector3.Dot(hitColliders[i].transform.position, transform.TransformDirection(Vector3.forward));
+
+                // get the distance the enemy is in front of the player
+                float forwardsDist = Vector3.Dot(targetDir, transform.forward);
+
+                // get the distance from the enemy to a line forwards of the player
+                targetDir.Normalize();
+                float sidewaysDist = Vector3.Dot(targetDir, transform.right);
+
+                if (sidewaysDist > -blockRange && sidewaysDist < blockRange && forwardsDist > 0 && forwardsDist < radius)
+                {
+                   if (enemy.attackBool)
+                    {
+
+                    }
+                }
+            }
         }
     }
 }

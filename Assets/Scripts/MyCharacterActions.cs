@@ -10,6 +10,7 @@ public class MyCharacterActions : PlayerActionSet {
     public PlayerAction RotateMirror;
     public PlayerAction lightAttack;
     public PlayerAction heavyAttack;
+    public PlayerAction block;
 
     public MyCharacterActions()
     {
@@ -18,7 +19,8 @@ public class MyCharacterActions : PlayerActionSet {
         Left = CreatePlayerAction("Left");
         Right = CreatePlayerAction("Right"); 
         lightAttack = CreatePlayerAction("lightAttack");
-        heavyAttack = CreatePlayerAction("heavyAttack");  
+        heavyAttack = CreatePlayerAction("heavyAttack");
+        block = CreatePlayerAction("block");
     }
 
 }
