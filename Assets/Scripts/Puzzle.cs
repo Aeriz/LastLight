@@ -11,12 +11,14 @@ namespace VolumetricLines
         public GameObject[] lights;
         public GameObject[] volumetricLines;
         public Transform[][] linePositions;
+        public GameObject[] keys;
+        public int keyCheck = 0;
         //public VolumetricLineBehavior[] linesScripts;
         //public MeshRenderer[] mesh;
 
         Vector3 incidenceAngle;
         Vector3 reflectionAngle;
-
+        public bool puzzleComplete = false;
         // Use this for initialization
         void Start()
         {
@@ -43,6 +45,22 @@ namespace VolumetricLines
             for (int i = 0; i < lights.Length; i++)
             {
                 RayTest(lights[i], i);
+            }
+            for(int i = 0; i < keys.Length; i++)
+            {
+                KeyScript key = keys[i].GetComponent<KeyScript>();
+                if(key.unlock)
+                {
+                    keyCheck++;
+                }
+            }
+            if(keyCheck == keys.Length)
+            {
+                puzzleComplete = true;
+            }
+            else
+            {
+                keyCheck = 0;
             }
         }
 
@@ -94,13 +112,26 @@ namespace VolumetricLines
                 if (hit.transform.tag == "Mirror")
                 {
                     i++;
-                    MirrorRayTest(hit, i++);
+                    MirrorRayTest(hit, i);
+                }
+                else if (hit.transform.tag == "PuzzleKey")
+                {
+                    KeyRayTest(hit, i++);
                 }
                 return true;
             }
             return false;
         }
+
+        void KeyRayTest(RaycastHit raySource, int i)
+        {
+            KeyScript key = raySource.collider.GetComponent<KeyScript>();
+            key.lightOnKey = true;
+        }   
+
     }
+
+
 }
 
 
