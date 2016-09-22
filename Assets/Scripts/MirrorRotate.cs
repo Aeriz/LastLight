@@ -80,10 +80,12 @@ public class MirrorRotate : MonoBehaviour
             if(characterActions.Left.IsPressed)
             {
                 transform.Rotate(new Vector3(0, .5f, 0));
+                //mirrorBase.transform.Rotate(new Vector3(0, .5f, 0));
             }
             if(characterActions.Right.IsPressed)
             {
                 transform.Rotate(new Vector3(0, -0.5f, 0));
+                //mirrorBase.transform.Rotate(new Vector3(0, -0.5f, 0));
             }
             //if (characterActions.RotateMirror.WasPressed == true)
             //{
