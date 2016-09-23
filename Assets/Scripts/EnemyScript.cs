@@ -18,9 +18,14 @@ public class EnemyScript : MonoBehaviour
     NavMeshAgent nav;
     public bool aggro = false;
     public bool attackBool = false;
+    public bool playerInRange = false;
+
+    Vector3 lastKnowPlayerLocation = new Vector3(0, 0, 0);
+    Vector3 lastKnowFriendlyLocation = new Vector3(0, 0, 0);
+
     //EnemyHealth enemyHealth;
-	// Use this for initialization
-	void Start ()
+    // Use this for initialization
+    void Start ()
     {
         nav = GetComponent<NavMeshAgent>();
         m_Rigidbody = GetComponent<Rigidbody>();
@@ -48,7 +53,6 @@ public class EnemyScript : MonoBehaviour
         if(currentHealth > 0 && playerHealth.currenthealth > 0 && aggro)
         {
             nav.enabled = true;
-            nav.SetDestination(player.transform.position);
         }
         else
         {
@@ -63,25 +67,63 @@ public class EnemyScript : MonoBehaviour
         int i = 0;
         while (i<hitColliders.Length)
         {
-            
-            if(hitColliders[i].tag == "Enemy")
-            {
-                EnemyScript enemy = hitColliders[i].GetComponent<EnemyScript>();
-                if (enemy.aggro)
-                {
-                    aggro = true;
-                    break;
-                }
-            }
-
+            //checks if player is in sight and range, if no in sight the enemy will go to players last known location and if it cannot see the player or aggro'd enemies then it will return to its home
             if (hitColliders[i].tag == "Player")
             {
-                aggro = true;
-                break;
+                RaycastHit hit;
+                if (Physics.Linecast(this.transform.position, hitColliders[i].transform.position, out hit))
+                {
+                    if (hit.collider.tag == "Player")
+                    {
+                        playerInRange = true;
+                        aggro = true;
+                        lastKnowPlayerLocation = hit.collider.transform.position;
+                        nav.SetDestination(player.transform.position);
+                        break;
+                    }
+                    else if (aggro && hit.collider.tag != "Player")
+                    {
+                        nav.SetDestination(lastKnowPlayerLocation);
+                        Debug.Log("blocked");
+                    }
+                    else
+                    {
+                        playerInRange = false;
+                        aggro = false;
+                    }
+                }
+
             }
-            else
+            //Check if enemies in sight and range are aggro'd, if so, goes to the enemy 
+            if (hitColliders[i].tag == "Enemy")
             {
-                aggro = false;
+                EnemyScript enemy = hitColliders[i].GetComponent<EnemyScript>();
+                RaycastHit hit;
+                int layerMask = 1 << 10;
+
+                layerMask = ~layerMask;
+                if (Physics.Linecast(this.transform.position, hitColliders[i].transform.position, out hit, layerMask))
+                {
+                    if (hit.collider.tag == "Enemy")
+                    {
+                        if (enemy.aggro && !playerInRange)
+                        {
+                            aggro = true;
+                            lastKnowFriendlyLocation = hit.collider.transform.position;
+                            nav.SetDestination(hitColliders[i].transform.position);
+                            break;
+                        }
+                        else if (aggro && hit.collider.tag != "Enemy")
+                        {
+                            nav.SetDestination(lastKnowFriendlyLocation);
+                            Debug.Log("blocked");
+                        }
+                        else
+                        {
+                            aggro = false;
+                        }
+                    }
+                }
             }
             i++;
         }
