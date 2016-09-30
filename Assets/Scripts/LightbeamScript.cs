@@ -6,16 +6,20 @@ public class LightbeamScript : MonoBehaviour {
     public Shader shader;
     public Texture texture;
     public Color color;
-    
-	// Use this for initialization
-	void Start ()
+    Renderer rend;
+
+    // Use this for initialization
+    void Start ()
     {
+        rend = GetComponent<Renderer>();
         shader = beamMaterial.shader;
+        texture = beamMaterial.mainTexture;
         color = Color.red;
 
-        Renderer rend = GetComponent<Renderer>();
+        
+
         rend.material = new Material(shader);
-        rend.material.mainTexture = beamMaterial.mainTexture;
+        rend.material.mainTexture = texture;
         rend.material.SetColor("_TintColor", color);
         
         //beamMaterial = GetComponent<Material>();
@@ -27,4 +31,10 @@ public class LightbeamScript : MonoBehaviour {
     {
 	    
 	}
+
+    public void changeColor(Color colour)
+    {
+        color = colour;
+        rend.material.SetColor("_TintColor", colour);
+    }
 }
