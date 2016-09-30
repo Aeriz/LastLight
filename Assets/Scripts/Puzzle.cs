@@ -7,7 +7,7 @@ namespace VolumetricLines
     {
         public int numMirrors;
         public GameObject[] mirrors;
-        public LineRenderer[] lines;
+        public GameObject[] lines;
         public GameObject[] lights;
         public GameObject[] volumetricLines;
         public Transform[][] linePositions;
@@ -19,6 +19,8 @@ namespace VolumetricLines
         Vector3 incidenceAngle;
         Vector3 reflectionAngle;
         public bool puzzleComplete = false;
+
+        public int j = 0;
         // Use this for initialization
         void Start()
         {
@@ -27,6 +29,7 @@ namespace VolumetricLines
         // Update is called once per frame
         void Update()
         {
+            j = 0;
             /*
             mesh = new MeshRenderer[volumetricLines.Length];
             linesScripts = new VolumetricLineBehavior[volumetricLines.Length];
@@ -40,7 +43,8 @@ namespace VolumetricLines
             */
             for (int i = 0; i < lines.Length; i++)
             {
-                lines[i].enabled = false;
+                LineRenderer tempLine = lines[i].GetComponent<LineRenderer>();
+                tempLine.enabled = false;
             }
             for (int i = 0; i < lights.Length; i++)
             {
@@ -66,6 +70,9 @@ namespace VolumetricLines
 
         bool RayTest(GameObject raySource, int i)
         {
+            LightSource tempLight = raySource.GetComponent<LightSource>();
+            LightbeamScript tempBeam = lines[j].GetComponent<LightbeamScript>();
+            LineRenderer tempLine = lines[j].GetComponent<LineRenderer>();
             RaycastHit hit;
             if (Physics.Raycast(raySource.transform.position, raySource.transform.forward, out hit, Mathf.Infinity))
             {
@@ -73,9 +80,10 @@ namespace VolumetricLines
                 incidenceAngle = hit.point - raySource.transform.position;
                 reflectionAngle = Vector3.Reflect(incidenceAngle, hit.normal);
                 Debug.DrawRay(raySource.transform.position, hit.point - raySource.transform.position, Color.white);
-                lines[i].enabled = true;
-                lines[i].SetPosition(0, raySource.transform.position);
-                lines[i].SetPosition(1, hit.point);
+                tempLine.enabled = true;
+                tempLine.SetPosition(0, raySource.transform.position);
+                tempLine.SetPosition(1, hit.point);
+                tempBeam.changeColor(tempLight.colour);
                 //linesScripts[i].enabled = true;
                 //mesh[i].enabled = true;
                 //linesScripts[i].m_startPos = raySource.transform.position;
@@ -84,25 +92,33 @@ namespace VolumetricLines
 
                 if (hit.transform.tag == "Mirror")
                 {
-                    i++;
-                    MirrorRayTest(hit, i);
+                    j++;
+                    MirrorRayTest(hit, j, tempLight.colour);
+                }
+                else
+                {
+                    j++;
                 }
                 return true;
 
             }
+            
             return false;
         }
 
-        bool MirrorRayTest(RaycastHit raySource, int i)
+        bool MirrorRayTest(RaycastHit raySource, int i, Color colour)
         {
+            LightbeamScript tempBeam = lines[j].GetComponent<LightbeamScript>();
+            LineRenderer tempLine = lines[j].GetComponent<LineRenderer>();
             RaycastHit hit;
             if (Physics.Raycast(raySource.point, reflectionAngle, out hit, Mathf.Infinity))
             {
                 incidenceAngle = hit.point - raySource.point;
                 Debug.DrawRay(raySource.point, incidenceAngle, Color.white);
-                lines[i].enabled = true;
-                lines[i].SetPosition(0, raySource.point);
-                lines[i].SetPosition(1, hit.point);
+                tempLine.enabled = true;
+                tempLine.SetPosition(0, raySource.point);
+                tempLine.SetPosition(1, hit.point);
+                tempBeam.changeColor(colour);
                 //linesScripts[i].enabled = true;
                 //mesh[i].enabled = true;
                 //linesScripts[i].m_startPos = raySource.transform.position;
@@ -111,15 +127,59 @@ namespace VolumetricLines
                 reflectionAngle = Vector3.Reflect(incidenceAngle, hit.normal);
                 if (hit.transform.tag == "Mirror")
                 {
-                    i++;
-                    MirrorRayTest(hit, i);
+                    j++;
+                    MirrorRayTest(hit, j, colour);
                 }
                 else if (hit.transform.tag == "PuzzleKey")
                 {
-                    KeyRayTest(hit, i++);
+                    KeyRayTest(hit, j);
+                }
+                else
+                {
+                    j++;
                 }
                 return true;
             }
+            
+            return false;
+        }
+
+        bool PrismRayTest(RaycastHit raySource, int i, Color colour)
+        {
+            LightbeamScript tempBeam = lines[j].GetComponent<LightbeamScript>();
+            LineRenderer tempLine = lines[j].GetComponent<LineRenderer>();
+            PrismScript tempPrism = raySource.collider.GetComponent<PrismScript>();
+            RaycastHit hit;
+            if (Physics.Raycast(raySource.point, reflectionAngle, out hit, Mathf.Infinity))
+            {
+                incidenceAngle = hit.point - raySource.point;
+                Debug.DrawRay(raySource.point, incidenceAngle, Color.white);
+                tempLine.enabled = true;
+                tempLine.SetPosition(0, raySource.point);
+                tempLine.SetPosition(1, hit.point);
+                tempBeam.changeColor(colour);
+                //linesScripts[i].enabled = true;
+                //mesh[i].enabled = true;
+                //linesScripts[i].m_startPos = raySource.transform.position;
+                //linesScripts[i].m_endPos = hit.point;
+                //linesScripts[i].SetStartAndEndPoints(raySource.transform.position, hit.point);
+                reflectionAngle = Vector3.Reflect(incidenceAngle, hit.normal);
+                if (hit.transform.tag == "Mirror")
+                {
+                    j++;
+                    MirrorRayTest(hit, j, colour);
+                }
+                else if (hit.transform.tag == "PuzzleKey")
+                {
+                    KeyRayTest(hit, j);
+                }
+                else
+                {
+                    j++;
+                }
+                return true;
+            }
+
             return false;
         }
 

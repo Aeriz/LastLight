@@ -10,6 +10,7 @@ TagManager:
   - MirrorBase
   - LightSource
   - PuzzleKey
+  - Prism
   layers:
   - Default
   - TransparentFX
