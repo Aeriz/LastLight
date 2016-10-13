@@ -12,6 +12,7 @@ namespace VolumetricLines
         public GameObject[] volumetricLines;
         public Transform[][] linePositions;
         public GameObject[] keys;
+        public GameObject[] lenses;
         public int keyCheck = 0;
         //public VolumetricLineBehavior[] linesScripts;
         //public MeshRenderer[] mesh;
@@ -45,6 +46,11 @@ namespace VolumetricLines
             {
                 LineRenderer tempLine = lines[i].GetComponent<LineRenderer>();
                 tempLine.enabled = false;
+            }
+            for (int i = 0; i < lenses.Length; i++)
+            {
+                LensScript temp = lenses[i].GetComponent<LensScript>();
+                temp.beamCounter = 0;
             }
             for (int i = 0; i < lights.Length; i++)
             {
@@ -95,6 +101,15 @@ namespace VolumetricLines
                     j++;
                     MirrorRayTest(hit, j, tempLight.colour);
                 }
+                else if (hit.transform.tag == "PuzzleKey")
+                {
+                    KeyRayTest(hit, j);
+                }
+                else if (hit.transform.tag == "LensOne" || hit.transform.tag == "LensTwo")
+                {
+                    j++;
+                    LensRayTest(hit, j, tempLight.colour);
+                }
                 else
                 {
                     j++;
@@ -134,6 +149,11 @@ namespace VolumetricLines
                 {
                     KeyRayTest(hit, j);
                 }
+                else if (hit.transform.tag == "LensOne" || hit.transform.tag == "LensTwo")
+                {
+                    j++;
+                    LensRayTest(hit, j, colour);
+                }
                 else
                 {
                     j++;
@@ -144,13 +164,33 @@ namespace VolumetricLines
             return false;
         }
 
-        bool PrismRayTest(RaycastHit raySource, int i, Color colour)
+        bool LensRayTest(RaycastHit raySource, int i, Color colour)
         {
-            LightbeamScript tempBeam = lines[j].GetComponent<LightbeamScript>();
-            LineRenderer tempLine = lines[j].GetComponent<LineRenderer>();
+            Transform temp;
+            LensScript tempLens = raySource.collider.GetComponentInParent<LensScript>();
+            tempLens.colours[tempLens.beamCounter] = colour;
+            if (tempLens.beamCounter < 1)
+            {
+                tempLens.beamCounter += 1;
+            }
+            if(raySource.collider.tag == "LensOne")
+            {
+                temp = tempLens.lensTwo.transform;
+            }
+            else
+            {
+                temp = tempLens.lensOne.transform;  
+            }
+            if(tempLens.lightBeamInt == 0)
+            {
+                tempLens.lightBeamInt = j;
+            }
+            colour = tempLens.colours[0] + tempLens.colours[1];
+            LightbeamScript tempBeam = lines[tempLens.lightBeamInt].GetComponent<LightbeamScript>();
+            LineRenderer tempLine = lines[tempLens.lightBeamInt].GetComponent<LineRenderer>();
             PrismScript tempPrism = raySource.collider.GetComponent<PrismScript>();
             RaycastHit hit;
-            if (Physics.Raycast(raySource.point, reflectionAngle, out hit, Mathf.Infinity))
+            if (Physics.Raycast(temp.position, temp.right, out hit, Mathf.Infinity))
             {
                 incidenceAngle = hit.point - raySource.point;
                 Debug.DrawRay(raySource.point, incidenceAngle, Color.white);
