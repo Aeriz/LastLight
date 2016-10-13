@@ -14,6 +14,7 @@ namespace VolumetricLines
         public GameObject[] keys;
         public GameObject[] lenses;
         public int keyCheck = 0;
+        public GameObject linePrefab;
         //public VolumetricLineBehavior[] linesScripts;
         //public MeshRenderer[] mesh;
 
@@ -25,6 +26,11 @@ namespace VolumetricLines
         // Use this for initialization
         void Start()
         {
+            lines = new GameObject[10];
+            for (int i = 0; i < lines.Length; i++)
+            {
+                lines[i] = Instantiate(linePrefab);
+            }
         }
 
         // Update is called once per frame
@@ -47,10 +53,13 @@ namespace VolumetricLines
                 LineRenderer tempLine = lines[i].GetComponent<LineRenderer>();
                 tempLine.enabled = false;
             }
-            for (int i = 0; i < lenses.Length; i++)
-            {
-                LensScript temp = lenses[i].GetComponent<LensScript>();
-                temp.beamCounter = 0;
+            if(lenses.Length < 1)
+                {
+                for (int i = 0; i < lenses.Length; i++)
+                {
+                    LensScript temp = lenses[i].GetComponent<LensScript>();
+                    temp.beamCounter = 0;
+                }
             }
             for (int i = 0; i < lights.Length; i++)
             {
@@ -66,7 +75,7 @@ namespace VolumetricLines
             }
             if(keyCheck == keys.Length)
             {
-                puzzleComplete = true;
+                this.puzzleComplete = true;
             }
             else
             {
@@ -76,6 +85,10 @@ namespace VolumetricLines
 
         bool RayTest(GameObject raySource, int i)
         {
+            if(j == lines.Length && j != 80)
+            {
+                expandLineArray();
+            }
             LightSource tempLight = raySource.GetComponent<LightSource>();
             LightbeamScript tempBeam = lines[j].GetComponent<LightbeamScript>();
             LineRenderer tempLine = lines[j].GetComponent<LineRenderer>();
@@ -123,6 +136,11 @@ namespace VolumetricLines
 
         bool MirrorRayTest(RaycastHit raySource, int i, Color colour)
         {
+            if (j == lines.Length && j != 80)
+            {
+                expandLineArray();
+            }
+
             LightbeamScript tempBeam = lines[j].GetComponent<LightbeamScript>();
             LineRenderer tempLine = lines[j].GetComponent<LineRenderer>();
             RaycastHit hit;
@@ -166,6 +184,10 @@ namespace VolumetricLines
 
         bool LensRayTest(RaycastHit raySource, int i, Color colour)
         {
+            if (j == lines.Length && j != 80)
+            {
+                expandLineArray();
+            }
             Transform temp;
             LensScript tempLens = raySource.collider.GetComponentInParent<LensScript>();
             tempLens.colours[tempLens.beamCounter] = colour;
@@ -228,6 +250,26 @@ namespace VolumetricLines
             KeyScript key = raySource.collider.GetComponent<KeyScript>();
             key.lightOnKey = true;
         }   
+
+        void expandLineArray()
+        {
+            GameObject[] tempLines = new GameObject[lines.Length];
+            for(int i = 0; i < lines.Length; i++)
+            {
+                tempLines[i] = lines[i];
+            }
+            lines = new GameObject[lines.Length * 2];
+            int tempNum = lines.Length;
+            for (int i = 0; i < tempNum; i++)
+            {
+                if(i < tempLines.Length)
+                {
+                    Destroy(tempLines[i]);
+                }
+                lines[i] = Instantiate(linePrefab);
+            }
+            
+        }
 
     }
 
