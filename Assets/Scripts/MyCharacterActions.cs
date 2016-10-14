@@ -11,6 +11,8 @@ public class MyCharacterActions : PlayerActionSet {
     public PlayerAction lightAttack;
     public PlayerAction heavyAttack;
     public PlayerAction block;
+    public PlayerAction save;
+    public PlayerAction load;
 
     public MyCharacterActions()
     {
@@ -21,6 +23,8 @@ public class MyCharacterActions : PlayerActionSet {
         lightAttack = CreatePlayerAction("lightAttack");
         heavyAttack = CreatePlayerAction("heavyAttack");
         block = CreatePlayerAction("block");
+        save = CreatePlayerAction("save");
+        load = CreatePlayerAction("load");
     }
 
 }
