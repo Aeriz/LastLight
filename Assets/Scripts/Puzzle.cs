@@ -75,7 +75,7 @@ namespace VolumetricLines
             }
             if(keyCheck == keys.Length)
             {
-                this.puzzleComplete = true;
+                puzzleComplete = true;
             }
             else
             {
@@ -85,7 +85,7 @@ namespace VolumetricLines
 
         bool RayTest(GameObject raySource, int i)
         {
-            if(j == lines.Length && j != 80)
+            if (j == lines.Length && lines.Length != 80)
             {
                 expandLineArray();
             }
@@ -136,7 +136,7 @@ namespace VolumetricLines
 
         bool MirrorRayTest(RaycastHit raySource, int i, Color colour)
         {
-            if (j == lines.Length && j != 80)
+            if (j == lines.Length && lines.Length != 80)
             {
                 expandLineArray();
             }
@@ -184,7 +184,7 @@ namespace VolumetricLines
 
         bool LensRayTest(RaycastHit raySource, int i, Color colour)
         {
-            if (j == lines.Length && j != 80)
+            if (j == lines.Length && lines.Length != 80)
             {
                 expandLineArray();
             }
