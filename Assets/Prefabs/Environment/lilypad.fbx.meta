@@ -1,36 +1,16 @@
 fileFormatVersion: 2
-guid: 81d07fccbc5e2c946875d70741e863ea
-timeCreated: 1476845181
+guid: 311e0a97533e8684489e73528bf1a5ef
+timeCreated: 1476924446
 licenseType: Free
 ModelImporter:
   serializedVersion: 19
   fileIDToRecycleName:
-    100000: lamp_post1
-    100002: //RootNode
-    100004: pCube2
-    100006: polySurface2
-    100008: pPlane5
-    100010: pSphere5
-    100012: transform3
-    100014: transform4
-    100016: transform5
-    100018: transform6
-    400000: lamp_post1
-    400002: //RootNode
-    400004: pCube2
-    400006: polySurface2
-    400008: pPlane5
-    400010: pSphere5
-    400012: transform3
-    400014: transform4
-    400016: transform5
-    400018: transform6
-    2300000: lamp_post1
-    2300002: //RootNode
-    3300000: lamp_post1
-    3300002: //RootNode
-    4300000: lamp_post1
-    4300002: lampost1
+    100000: //RootNode
+    400000: //RootNode
+    2300000: //RootNode
+    3300000: //RootNode
+    4300000: lilypad1
+    6400000: //RootNode
     9500000: //RootNode
   materials:
     importMaterials: 1
@@ -56,9 +36,9 @@ ModelImporter:
     isReadable: 1
   meshes:
     lODScreenPercentages: []
-    globalScale: 1.25
+    globalScale: 10
     meshCompression: 0
-    addColliders: 0
+    addColliders: 1
     importBlendShapes: 1
     swapUVChannels: 0
     generateSecondaryUV: 0
