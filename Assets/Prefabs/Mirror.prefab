@@ -27,10 +27,10 @@ GameObject:
   - 114: {fileID: 114000014046427656}
   m_Layer: 0
   m_Name: Mirror
-  m_TagString: Untagged
+  m_TagString: MirrorPane
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 4294967295
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!1 &1000010094623406
 GameObject:
@@ -45,7 +45,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 4294967295
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!1 &1000010159524702
 GameObject:
@@ -83,7 +83,7 @@ GameObject:
   m_TagString: Mirror
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 4294967295
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!4 &4000011272655148
 Transform:

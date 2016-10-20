@@ -11,6 +11,10 @@ TagManager:
   - LightSource
   - PuzzleKey
   - Prism
+  - LensTwo
+  - LensOne
+  - MirrorPane
+  - SaveGame
   layers:
   - Default
   - TransparentFX

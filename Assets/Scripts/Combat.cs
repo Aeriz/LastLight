@@ -9,6 +9,7 @@ public class Combat : MonoBehaviour {
     public int heavyAttack = 20;
     public float radius = 2;
     float blockRange = 0.7f;
+    public bool blocking = false;
     int j = 0;
 	// Use this for initialization
 	void Start ()
@@ -29,6 +30,21 @@ public class Combat : MonoBehaviour {
         if (characterActions.heavyAttack.IsPressed)
         {
             attackEnemies(heavyAttack, 0.5f);
+        }
+        if(characterActions.block.IsPressed)
+        {
+            blockDamage();
+            blocking = true;
+        }
+        else if(characterActions.block.WasReleased)
+        {
+            GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
+            for(int i = 0; i < enemies.Length; i++)
+            {
+                EnemyScript enemy = enemies[i].GetComponent<EnemyScript>();
+                enemy.playerBlocking = false;
+            }
+            blocking = false;
         }
     }
 
@@ -88,12 +104,10 @@ public class Combat : MonoBehaviour {
 
                 if (sidewaysDist > -blockRange && sidewaysDist < blockRange && forwardsDist > 0 && forwardsDist < radius)
                 {
-                   if (enemy.attackBool)
-                    {
-
-                    }
+                    enemy.playerBlocking = true;
                 }
             }
+            i++;
         }
     }
 }

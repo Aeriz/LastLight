@@ -13,6 +13,8 @@ public class MyCharacterActions : PlayerActionSet {
     public PlayerAction block;
     public PlayerAction save;
     public PlayerAction load;
+    public PlayerAction beamSpell;
+    public PlayerAction AOESpell;
 
     public MyCharacterActions()
     {
@@ -25,6 +27,8 @@ public class MyCharacterActions : PlayerActionSet {
         block = CreatePlayerAction("block");
         save = CreatePlayerAction("save");
         load = CreatePlayerAction("load");
+        beamSpell = CreatePlayerAction("beamSpell");
+        AOESpell = CreatePlayerAction("AOESpell");
     }
 
 }

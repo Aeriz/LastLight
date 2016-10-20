@@ -6,12 +6,15 @@ using InControl;
 public class SaveGame : MonoBehaviour
 {
     public GameObject player;
+    public GameObject[] mirrors;
+    public Transform[] loadedMirrors;
     MyCharacterActions characterActions;
     Health playerHealth;
 
     // Use this for initialization
     void Start()
     {
+        mirrors = GameObject.FindGameObjectsWithTag("MirrorPane");
         player = GameObject.FindGameObjectWithTag("Player");
         playerHealth = player.GetComponent<Health>();
         characterActions = new MyCharacterActions();
@@ -22,12 +25,17 @@ public class SaveGame : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
         if (characterActions.save.IsPressed)
         {
             ES2.Save(transform, "myFile");
             ES2.Save(player.transform.position, "myFile.txt?tag=playerPosition");
             ES2.Save(playerHealth.currenthealth, "myFile.txt?tag=playerHealth");
+
+            for (int i = 0; i < mirrors.Length; i++)
+            {
+                ES2.Save(mirrors[i].transform.position, "myFile.txt?tag=mirrorP" + i);
+                ES2.Save(mirrors[i].transform.eulerAngles.y, "myFile.txt?tag=mirrorA" + i);
+            }
             /*
             PlayerPrefs.SetFloat("PlayerX", player.transform.position.x);
             PlayerPrefs.SetFloat("PlayerY", player.transform.position.y);
@@ -35,25 +43,84 @@ public class SaveGame : MonoBehaviour
             PlayerPrefs.Save();
             */
         }
-        if(characterActions.load.IsPressed)
+        if (characterActions.load.IsPressed)
         {
             if (ES2.Exists("myFile"))
             {
                 player.transform.position = ES2.Load<Vector3>("myFile.txt?tag=playerPosition");
                 playerHealth.currenthealth = ES2.Load<int>("myFile.txt?tag=playerHealth");
+
+                loadedMirrors = new Transform[mirrors.Length];
+                for (int i = 0; i < mirrors.Length; i++)
+                {
+                    if (ES2.Exists("myFile.txt?tag=mirrorP" + i))
+                    {
+                        Vector3 pos = ES2.Load<Vector3>("myFile.txt?tag=mirrorP" + i);
+                        float angle = ES2.Load<float>("myFile.txt?tag=mirrorA" + i);
+                        for (int j = 0; j < mirrors.Length; j++)
+                        {
+                            if (mirrors[j].transform.position == pos)
+                            {
+                                mirrors[j].transform.eulerAngles = new Vector3(0, angle, 0);
+                            }
+                        }
+                    }
+                }
             }
             /*
-            Vector3 tempPos;
-            tempPos.x = PlayerPrefs.GetFloat("PlayerX");
-            tempPos.y = PlayerPrefs.GetFloat("PlayerY");
-            tempPos.z = PlayerPrefs.GetFloat("PlayerZ");
-            player.transform.position = tempPos;
-            */
-        }
 
+              Vector3 tempPos;
+              tempPos.x = PlayerPrefs.GetFloat("PlayerX");
+              tempPos.y = PlayerPrefs.GetFloat("PlayerY");
+              tempPos.z = PlayerPrefs.GetFloat("PlayerZ");
+              player.transform.position = tempPos;
+              */
+        }
     }
-    
+
+
+
+    public void GameSave()
+    {
+        ES2.Save(transform, "myFile");
+        ES2.Save(player.transform.position, "myFile.txt?tag=playerPosition");
+        ES2.Save(playerHealth.currenthealth, "myFile.txt?tag=playerHealth");
+
+        for (int i = 0; i < mirrors.Length; i++)
+        {
+            ES2.Save(mirrors[i].transform.position, "myFile.txt?tag=mirrorP" + i);
+            ES2.Save(mirrors[i].transform.eulerAngles.y, "myFile.txt?tag=mirrorA" + i);
+        }
+    }
+
+    public void LoadGame()
+    {
+        if (ES2.Exists("myFile"))
+        {
+            player.transform.position = ES2.Load<Vector3>("myFile.txt?tag=playerPosition");
+            playerHealth.currenthealth = ES2.Load<int>("myFile.txt?tag=playerHealth");
+
+            loadedMirrors = new Transform[mirrors.Length];
+            for (int i = 0; i < mirrors.Length; i++)
+            {
+                if (ES2.Exists("myFile.txt?tag=mirrorP" + i))
+                {
+                    Vector3 pos = ES2.Load<Vector3>("myFile.txt?tag=mirrorP" + i);
+                    float angle = ES2.Load<float>("myFile.txt?tag=mirrorA" + i);
+                    for (int j = 0; j < mirrors.Length; j++)
+                    {
+                        if (mirrors[j].transform.position == pos)
+                        {
+                            mirrors[j].transform.eulerAngles = new Vector3(0, angle, 0);
+                        }
+                    }
+                }
+            }
+        }
+    }
 }
+
+
 
 
 
@@ -67,5 +134,14 @@ public class SaveGame : MonoBehaviour
  * player level?
  * 
  * 
+ * 
+ * 
+ * 
+ * 
+ * get all the mirrors, save them
+ * to load, compare the position of the loaded list to the mirror aquired and if it is the same one delete it from the list
 */
+
+
+
 

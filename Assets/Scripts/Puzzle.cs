@@ -116,7 +116,7 @@ namespace VolumetricLines
                 }
                 else if (hit.transform.tag == "PuzzleKey")
                 {
-                    KeyRayTest(hit, j);
+                    KeyRayTest(hit, j, tempLight.colour);
                 }
                 else if (hit.transform.tag == "LensOne" || hit.transform.tag == "LensTwo")
                 {
@@ -165,7 +165,7 @@ namespace VolumetricLines
                 }
                 else if (hit.transform.tag == "PuzzleKey")
                 {
-                    KeyRayTest(hit, j);
+                    KeyRayTest(hit, j, colour);
                 }
                 else if (hit.transform.tag == "LensOne" || hit.transform.tag == "LensTwo")
                 {
@@ -212,6 +212,22 @@ namespace VolumetricLines
             LineRenderer tempLine = lines[tempLens.lightBeamInt].GetComponent<LineRenderer>();
             PrismScript tempPrism = raySource.collider.GetComponent<PrismScript>();
             RaycastHit hit;
+            if (colour.r > 1)
+            {
+                colour.r = 1;
+            }
+            if (colour.g > 1)
+            {
+                colour.g = 1;
+            }
+            if (colour.b > 1)
+            {
+                colour.b = 1;
+            }
+            if (colour.a > 1)
+            {
+                colour.a = 1;
+            }
             if (Physics.Raycast(temp.position, temp.right, out hit, Mathf.Infinity))
             {
                 incidenceAngle = hit.point - raySource.point;
@@ -233,7 +249,7 @@ namespace VolumetricLines
                 }
                 else if (hit.transform.tag == "PuzzleKey")
                 {
-                    KeyRayTest(hit, j);
+                    KeyRayTest(hit, j, colour);
                 }
                 else
                 {
@@ -245,10 +261,12 @@ namespace VolumetricLines
             return false;
         }
 
-        void KeyRayTest(RaycastHit raySource, int i)
+        void KeyRayTest(RaycastHit raySource, int i, Color colour)
         {
+
             KeyScript key = raySource.collider.GetComponent<KeyScript>();
-            key.lightOnKey = true;
+            if (colour == key.colour)
+                key.lightOnKey = true;
         }   
 
         void expandLineArray()

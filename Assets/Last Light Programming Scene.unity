@@ -171,6 +171,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   colour: {r: 1, g: 0, b: 0, a: 0}
   colourVec: {x: 1, y: 0, z: 1, w: 1}
+  mirrorBase: {fileID: 0}
+  canPushMirror: 0
 --- !u!1001 &24316863
 Prefab:
   m_ObjectHideFlags: 0
@@ -962,6 +964,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   colour: {r: 1, g: 0, b: 0, a: 0}
   colourVec: {x: 1, y: 0.92, z: 0.016, w: 1}
+  mirrorBase: {fileID: 0}
+  canPushMirror: 0
 --- !u!4 &167239919 stripped
 Transform:
   m_PrefabParentObject: {fileID: 4000011272655148, guid: 2ec2f49bb70d3b14cb6a039c72ab052c,
@@ -1333,6 +1337,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   colour: {r: 1, g: 0, b: 0, a: 0}
   colourVec: {x: 1, y: 0, z: 0, w: 1}
+  mirrorBase: {fileID: 0}
+  canPushMirror: 0
 --- !u!4 &251390346 stripped
 Transform:
   m_PrefabParentObject: {fileID: 4000011272655148, guid: 2ec2f49bb70d3b14cb6a039c72ab052c,
@@ -2436,6 +2442,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   colour: {r: 1, g: 0, b: 0, a: 0}
   colourVec: {x: 0, y: 0, z: 1, w: 1}
+  mirrorBase: {fileID: 0}
+  canPushMirror: 0
 --- !u!1 &491094422
 GameObject:
   m_ObjectHideFlags: 0
@@ -3273,7 +3281,7 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4000012304222536, guid: 547d414ce0a634b41bb1e0cba22f394c, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 9.8
+      value: 3.9
       objectReference: {fileID: 0}
     - target: {fileID: 4000012304222536, guid: 547d414ce0a634b41bb1e0cba22f394c, type: 2}
       propertyPath: m_LocalPosition.y
@@ -3281,7 +3289,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4000012304222536, guid: 547d414ce0a634b41bb1e0cba22f394c, type: 2}
       propertyPath: m_LocalPosition.z
-      value: -122.8
+      value: 4.3
       objectReference: {fileID: 0}
     - target: {fileID: 4000012304222536, guid: 547d414ce0a634b41bb1e0cba22f394c, type: 2}
       propertyPath: m_LocalRotation.x
@@ -4585,6 +4593,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   colour: {r: 1, g: 0, b: 0, a: 0}
   colourVec: {x: 1, y: 0, z: 1, w: 1}
+  mirrorBase: {fileID: 0}
+  canPushMirror: 0
 --- !u!1 &942908294
 GameObject:
   m_ObjectHideFlags: 0
@@ -4629,6 +4639,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   colour: {r: 1, g: 0, b: 0, a: 0}
   colourVec: {x: 0, y: 0, z: 1, w: 1}
+  mirrorBase: {fileID: 0}
+  canPushMirror: 0
 --- !u!4 &945740918 stripped
 Transform:
   m_PrefabParentObject: {fileID: 4000011272655148, guid: 2ec2f49bb70d3b14cb6a039c72ab052c,
@@ -4639,6 +4651,28 @@ Transform:
   m_PrefabParentObject: {fileID: 4000011272655148, guid: 2ec2f49bb70d3b14cb6a039c72ab052c,
     type: 2}
   m_PrefabInternal: {fileID: 331858812}
+--- !u!1 &950954491 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1000011552328690, guid: 547d414ce0a634b41bb1e0cba22f394c,
+    type: 2}
+  m_PrefabInternal: {fileID: 702370451}
+--- !u!114 &950954499
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 950954491}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 87b6b7bd33f9a6a46bba72ef8791364c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  beamAttack: 100
+  AOEAttack: 20
+  radius: 7
+  distance: 100
+  width: 5
+  line: {fileID: 0}
 --- !u!1 &963134428
 GameObject:
   m_ObjectHideFlags: 0
@@ -4841,6 +4875,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   colour: {r: 1, g: 0, b: 0, a: 0}
   colourVec: {x: 1, y: 0, z: 0, w: 1}
+  mirrorBase: {fileID: 0}
+  canPushMirror: 0
 --- !u!1001 &976926722
 Prefab:
   m_ObjectHideFlags: 0
@@ -5285,7 +5321,7 @@ GameObject:
   - 114: {fileID: 1034744330}
   m_Layer: 0
   m_Name: SaveGame
-  m_TagString: Untagged
+  m_TagString: SaveGame
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5302,6 +5338,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 0}
+  mirrors: []
+  loadedMirrors: []
 --- !u!4 &1034744331
 Transform:
   m_ObjectHideFlags: 0
@@ -6438,6 +6476,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   colour: {r: 1, g: 0, b: 0, a: 0}
   colourVec: {x: 1, y: 0.92, z: 0.016, w: 1}
+  mirrorBase: {fileID: 0}
+  canPushMirror: 0
 --- !u!4 &1168754212 stripped
 Transform:
   m_PrefabParentObject: {fileID: 4000011272655148, guid: 2ec2f49bb70d3b14cb6a039c72ab052c,
@@ -7572,6 +7612,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   colour: {r: 1, g: 0, b: 0, a: 0}
   colourVec: {x: 0, y: 1, z: 1, w: 1}
+  mirrorBase: {fileID: 0}
+  canPushMirror: 0
 --- !u!1 &1400084190
 GameObject:
   m_ObjectHideFlags: 0
@@ -7616,6 +7658,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   colour: {r: 1, g: 0, b: 0, a: 0}
   colourVec: {x: 0, y: 1, z: 0, w: 1}
+  mirrorBase: {fileID: 0}
+  canPushMirror: 0
 --- !u!4 &1405627323 stripped
 Transform:
   m_PrefabParentObject: {fileID: 4000011649705116, guid: 085ccd7a0cb9558428437d3564a1e7fa,
@@ -8024,6 +8068,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   colour: {r: 1, g: 0, b: 0, a: 0}
   colourVec: {x: 0, y: 1, z: 0, w: 1}
+  mirrorBase: {fileID: 0}
+  canPushMirror: 0
 --- !u!1001 &1497434098
 Prefab:
   m_ObjectHideFlags: 0
@@ -10615,6 +10661,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   colour: {r: 1, g: 0, b: 0, a: 0}
   colourVec: {x: 0, y: 1, z: 1, w: 1}
+  mirrorBase: {fileID: 0}
+  canPushMirror: 0
 --- !u!1001 &1971094041
 Prefab:
   m_ObjectHideFlags: 0
@@ -11223,6 +11271,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   colour: {r: 1, g: 0, b: 0, a: 0}
   colourVec: {x: 0, y: 1, z: 1, w: 1}
+  mirrorBase: {fileID: 0}
+  canPushMirror: 0
 --- !u!1 &2120832660
 GameObject:
   m_ObjectHideFlags: 0

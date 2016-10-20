@@ -19,6 +19,7 @@ public class EnemyScript : MonoBehaviour
     public bool aggro = false;
     public bool attackBool = false;
     public bool playerInRange = false;
+    public bool playerBlocking = false;
 
     Vector3 lastKnowPlayerLocation = new Vector3(0, 0, 0);
     Vector3 lastKnowFriendlyLocation = new Vector3(0, 0, 0);
@@ -38,7 +39,7 @@ public class EnemyScript : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
     {
-       
+       if(!isDead)
         checkEnemyInRange();
          
 	    if(inRange)
@@ -47,7 +48,7 @@ public class EnemyScript : MonoBehaviour
         }
         if(timer >= attackSpeed && inRange && currentHealth > 0 && aggro)
         {
-            //attack();
+            attack();
             attackBool = true;
         }
         if(currentHealth > 0 && playerHealth.currenthealth > 0 && aggro)
@@ -134,7 +135,14 @@ public class EnemyScript : MonoBehaviour
         timer = 0;
         if (playerHealth.currenthealth > 0)
         {
-            playerHealth.takeDamage(attackDamage);
+            if (playerBlocking == false)
+            {
+                playerHealth.takeDamage(attackDamage);
+            }
+            else
+            {
+                //playerStamina
+            }
         }
         attackBool = false;
     }
