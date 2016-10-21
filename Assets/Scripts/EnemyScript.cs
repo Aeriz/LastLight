@@ -20,7 +20,7 @@ public class EnemyScript : MonoBehaviour
     public bool attackBool = false;
     public bool playerInRange = false;
     public bool playerBlocking = false;
-
+    public bool stunned = false;
     Vector3 lastKnowPlayerLocation = new Vector3(0, 0, 0);
     Vector3 lastKnowFriendlyLocation = new Vector3(0, 0, 0);
 
@@ -46,12 +46,12 @@ public class EnemyScript : MonoBehaviour
         {
             timer += Time.deltaTime;
         }
-        if(timer >= attackSpeed && inRange && currentHealth > 0 && aggro)
+        if(timer >= attackSpeed && inRange && currentHealth > 0 && aggro && !stunned)
         {
             attack();
             attackBool = true;
         }
-        if(currentHealth > 0 && playerHealth.currenthealth > 0 && aggro)
+        if(currentHealth > 0 && playerHealth.currenthealth > 0 && aggro && !stunned)
         {
             nav.enabled = true;
         }
