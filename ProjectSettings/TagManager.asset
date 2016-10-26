@@ -15,6 +15,7 @@ TagManager:
   - LensOne
   - MirrorPane
   - SaveGame
+  - Collectable
   layers:
   - Default
   - TransparentFX

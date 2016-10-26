@@ -118,6 +118,11 @@ Prefab:
       propertyPath: mirrors.Array.size
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 114000012914703558, guid: 101e534ca8a28284cb7136c8034344dd,
+        type: 2}
+      propertyPath: volumetricLines.Array.size
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4000012979602254, guid: 101e534ca8a28284cb7136c8034344dd, type: 2}
       propertyPath: m_LocalPosition.x
       value: -24.5
@@ -185,6 +190,11 @@ Prefab:
       propertyPath: keys.Array.data[0]
       value: 
       objectReference: {fileID: 1517537548}
+    - target: {fileID: 114000012914703558, guid: 101e534ca8a28284cb7136c8034344dd,
+        type: 2}
+      propertyPath: linePrefab
+      value: 
+      objectReference: {fileID: 128552, guid: 8bf2e3484d874f44887f66caa582de72, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 101e534ca8a28284cb7136c8034344dd, type: 2}
   m_IsPrefabParent: 0
@@ -249,7 +259,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 10850352, guid: 970be903f480e9d40b1ccafba6c25d22, type: 2}
       propertyPath: m_Intensity
-      value: 1.3
+      value: 1.2
       objectReference: {fileID: 0}
     - target: {fileID: 10850352, guid: 970be903f480e9d40b1ccafba6c25d22, type: 2}
       propertyPath: m_Shadows.m_Strength
@@ -501,6 +511,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   colour: {r: 0, g: 0, b: 0, a: 0}
   colourVec: {x: 1, y: 0, z: 0, w: 1}
+  mirrorBase: {fileID: 0}
+  canPushMirror: 0
 --- !u!4 &526727756 stripped
 Transform:
   m_PrefabParentObject: {fileID: 4000012979602254, guid: 101e534ca8a28284cb7136c8034344dd,
@@ -1552,15 +1564,15 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4000012304222536, guid: 547d414ce0a634b41bb1e0cba22f394c, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 111.75
+      value: 114.17
       objectReference: {fileID: 0}
     - target: {fileID: 4000012304222536, guid: 547d414ce0a634b41bb1e0cba22f394c, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 10.03
+      value: 5.62
       objectReference: {fileID: 0}
     - target: {fileID: 4000012304222536, guid: 547d414ce0a634b41bb1e0cba22f394c, type: 2}
       propertyPath: m_LocalPosition.z
-      value: 58.29
+      value: 78.09
       objectReference: {fileID: 0}
     - target: {fileID: 4000012304222536, guid: 547d414ce0a634b41bb1e0cba22f394c, type: 2}
       propertyPath: m_LocalRotation.x
