@@ -11,9 +11,11 @@ public class Combat : MonoBehaviour {
     float blockRange = 0.7f;
     public bool blocking = false;
     int j = 0;
+    Mana_Stamina stamina;
 	// Use this for initialization
 	void Start ()
     {
+        stamina = GetComponent<Mana_Stamina>();
         characterActions = new MyCharacterActions();
         characterActions.lightAttack.AddDefaultBinding(Mouse.LeftButton);
         characterActions.heavyAttack.AddDefaultBinding(Mouse.RightButton);
@@ -31,12 +33,12 @@ public class Combat : MonoBehaviour {
         {
             attackEnemies(heavyAttack, 0.5f);
         }
-        if(characterActions.block.IsPressed)
+        if(characterActions.block.IsPressed && (stamina.currentStamina - 10) >= 0)
         {
             blockDamage();
             blocking = true;
         }
-        else if(characterActions.block.WasReleased)
+        else if(characterActions.block.WasReleased || (stamina.currentStamina - 10) <= 0)
         {
             GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
             for(int i = 0; i < enemies.Length; i++)

@@ -8,8 +8,11 @@ public class Magic : MonoBehaviour
     MyCharacterActions characterActions;
     public int beamAttack = 100;
     public int AOEAttack = 20;
+    public float beamCost = 50;
+    public float AOECost = 30;
     public float radius = 7;
     public float distance = 10;
+    public float AOEdistance = 5;
     public float width;
     public GameObject lineObject;
     LineRenderer line;
@@ -23,6 +26,7 @@ public class Magic : MonoBehaviour
 
     GameObject player;
     ThirdPersonUserControl thirdPersonScript;
+    Mana_Stamina mana;
 
 
     // Use this for initialization
@@ -33,6 +37,8 @@ public class Magic : MonoBehaviour
         characterActions = new MyCharacterActions();
         characterActions.beamSpell.AddDefaultBinding(Key.Key1);
         characterActions.AOESpell.AddDefaultBinding(Key.Key2);
+        mana = GetComponent<Mana_Stamina>();
+
 
         player = GameObject.FindGameObjectWithTag("Player");
         thirdPersonScript = player.GetComponentInChildren<ThirdPersonUserControl>();
@@ -41,8 +47,9 @@ public class Magic : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (characterActions.beamSpell.IsPressed && beamCoolDown <= 0)
+        if (characterActions.beamSpell.IsPressed && beamCoolDown <= 0 && (mana.currentMana - beamCost) >= 0)
         {
+            mana.useMana(beamCost);
             thirdPersonScript.canPushMirror = true;
             beamCoolDown = 5;
             firing = true;
@@ -50,14 +57,26 @@ public class Magic : MonoBehaviour
             line.SetPosition(0, new Vector3(transform.position.x, transform.position.y + 1, transform.position.z));
             line.SetPosition(1, new Vector3(transform.position.x, transform.position.y + 1, transform.position.z) + transform.forward * distance);
             line.SetWidth(0.1f, 0.1f);
-            //beamSpell();
+            beamSpell();
         }
         if(beamCoolDown > 0)
         {
             beamCoolDown -= Time.deltaTime;
         }
 
-        if(firing)
+        if (characterActions.AOESpell.IsPressed && AOECoolDown <= 0 && (mana.currentMana - AOECost) >= 0)
+        {
+            mana.useMana(AOECost);
+            //thirdPersonScript.canPushMirror = true;
+            AOECoolDown = 5;
+            AOESpell();
+        }
+        if (AOECoolDown > 0)
+        {
+            AOECoolDown -= Time.deltaTime;
+        }
+
+        if (firing)
         {
 
             widthTimer += Time.deltaTime;
@@ -108,6 +127,18 @@ public class Magic : MonoBehaviour
 
     void AOESpell()
     {
-
+        Collider[] hitColliders = Physics.OverlapSphere(transform.position, AOEdistance);
+        int i = 0;
+        while (i < hitColliders.Length)
+        {
+            //checks if player is in sight and range, if no in sight the enemy will go to players last known location and if it cannot see the player or aggro'd enemies then it will return to its home
+            if (hitColliders[i].tag == "Enemy")
+            {
+                EnemyScript tempEnemy = hitColliders[i].GetComponent<EnemyScript>();
+                tempEnemy.stunned = true;
+                tempEnemy.takeDamage(AOEAttack);
+            }
+            i++;
+        }
     }
 }

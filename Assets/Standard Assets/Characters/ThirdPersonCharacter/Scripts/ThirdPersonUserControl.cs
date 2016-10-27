@@ -21,9 +21,11 @@ namespace UnityStandardAssets.Characters.ThirdPerson
         public bool closeMode = false;
         public bool lockedOn = false;
         public bool dash = false;
+        public bool dashStamina = false;
         public bool dashTimer = false;
         float timer = 0;
         public int dashCooldown = 1;
+        
 
 
         private void Start()
@@ -122,11 +124,15 @@ namespace UnityStandardAssets.Characters.ThirdPerson
             // walk speed multiplier
             if (Input.GetKey(KeyCode.LeftAlt) && m_Character.devMode) m_Move *= 5f;
             if (Input.GetKey(KeyCode.LeftAlt)) m_Move *= 0.5f;
+            if (Input.GetKey(KeyCode.LeftControl)) m_Move *= 0.7f;
 #endif
-			if (Input.GetKey(KeyCode.LeftShift) && m_Character.m_IsGrounded == true)
+            if (Input.GetKey(KeyCode.LeftShift) && m_Character.m_IsGrounded == true)
             {
                 if (!dashTimer)
+                {
                     dash = true;
+                    dashStamina = true;
+                }
                 dashTimer = true;
             }
             // pass all parameters to the character control script

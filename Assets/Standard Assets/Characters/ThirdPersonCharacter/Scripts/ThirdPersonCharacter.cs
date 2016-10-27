@@ -48,6 +48,9 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 
         public bool closeMode = false;
         public Transform target;
+        public Vector3 floatFalling;
+        public Vector3 gravity;
+        public Vector3 velocity;
 
         void Start()
         {
@@ -102,6 +105,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
             if (m_IsGrounded)
             {
                 HandleGroundedMovement(crouch, jump);
+                //m_Rigidbody.velocity = new Vector3(m_Rigidbody.velocity.x, 0, m_Rigidbody.velocity.z);
             }
             else
             {
@@ -207,7 +211,11 @@ namespace UnityStandardAssets.Characters.ThirdPerson
             else if(_float && m_Rigidbody.velocity.y < 0)
             {
                 Vector3 extraGravityForce = (Physics.gravity * m_GravityMultiplierFloat) - Physics.gravity;
+                floatFalling = extraGravityForce + move;
+                gravity = Physics.gravity;
                 m_Rigidbody.AddForce(extraGravityForce + move);
+                m_Rigidbody.velocity = new Vector3(m_Rigidbody.velocity.x, -1, m_Rigidbody.velocity.z);
+                velocity = m_Rigidbody.velocity;
 
                 m_GroundCheckDistance = m_Rigidbody.velocity.y < 0 ? m_OrigGroundCheckDistance : 0.01f;
                

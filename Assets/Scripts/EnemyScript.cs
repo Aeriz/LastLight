@@ -13,6 +13,7 @@ public class EnemyScript : MonoBehaviour
     float timer;
     float checkAggroTimer = 0;
     Health playerHealth;
+    Mana_Stamina manaAndStamina;
     GameObject player;
     Rigidbody m_Rigidbody;
     NavMeshAgent nav;
@@ -21,8 +22,10 @@ public class EnemyScript : MonoBehaviour
     public bool playerInRange = false;
     public bool playerBlocking = false;
     public bool stunned = false;
+    public float stunTimer = 0;
     Vector3 lastKnowPlayerLocation = new Vector3(0, 0, 0);
     Vector3 lastKnowFriendlyLocation = new Vector3(0, 0, 0);
+    Vector3 enemyWanderRange;
 
     //EnemyHealth enemyHealth;
     // Use this for initialization
@@ -33,6 +36,8 @@ public class EnemyScript : MonoBehaviour
         currentHealth = startHealth;
         player = GameObject.FindGameObjectWithTag("Player");
         playerHealth = player.GetComponent<Health>();
+        manaAndStamina = player.GetComponent<Mana_Stamina>();
+        enemyWanderRange = m_Rigidbody.transform.position;
         //enemyHealth = GetComponent<EnemyHealth>();
 	}
 	
@@ -55,6 +60,16 @@ public class EnemyScript : MonoBehaviour
         {
             nav.enabled = true;
         }
+        else if(stunned)
+        {
+            nav.enabled = false;
+            stunTimer += Time.deltaTime;
+            if(stunTimer > 1)
+            {
+                stunned = false;
+                stunTimer = 0;
+            }
+        }
         else
         {
             nav.enabled = false;
@@ -64,7 +79,7 @@ public class EnemyScript : MonoBehaviour
 
     void checkEnemyInRange()
     {
-        Collider[] hitColliders = Physics.OverlapSphere(transform.position, aggroRange);
+        Collider[] hitColliders = Physics.OverlapSphere(enemyWanderRange, aggroRange);
         int i = 0;
         while (i<hitColliders.Length)
         {
@@ -78,11 +93,13 @@ public class EnemyScript : MonoBehaviour
                     {
                         playerInRange = true;
                         aggro = true;
+                        nav.enabled = true;
                         lastKnowPlayerLocation = hit.collider.transform.position;
-                        nav.SetDestination(player.transform.position);
+                        nav.SetDestination(lastKnowPlayerLocation);
                         break;
                     }
-                    else if (aggro && hit.collider.tag != "Player")
+                    /*
+                    else if (aggro)
                     {
                         nav.SetDestination(lastKnowPlayerLocation);
                         Debug.Log("blocked");
@@ -92,6 +109,7 @@ public class EnemyScript : MonoBehaviour
                         playerInRange = false;
                         aggro = false;
                     }
+                    */
                 }
 
             }
@@ -110,10 +128,12 @@ public class EnemyScript : MonoBehaviour
                         if (enemy.aggro && !playerInRange)
                         {
                             aggro = true;
+                            nav.enabled = true;
                             lastKnowFriendlyLocation = hit.collider.transform.position;
                             nav.SetDestination(hitColliders[i].transform.position);
                             break;
                         }
+                        /*
                         else if (aggro && hit.collider.tag != "Enemy")
                         {
                             nav.SetDestination(lastKnowFriendlyLocation);
@@ -123,6 +143,7 @@ public class EnemyScript : MonoBehaviour
                         {
                             aggro = false;
                         }
+                        */
                     }
                 }
             }
@@ -141,7 +162,7 @@ public class EnemyScript : MonoBehaviour
             }
             else
             {
-                //playerStamina
+                manaAndStamina.useStamina(10);
             }
         }
         attackBool = false;
