@@ -16,6 +16,7 @@ TagManager:
   - MirrorPane
   - SaveGame
   - Collectable
+  - KillQuest
   layers:
   - Default
   - TransparentFX
