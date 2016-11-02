@@ -8,6 +8,7 @@ namespace UnityStandardAssets.Cameras
         MyCharacterActions characterActions;
         RaycastHit hit;
         public FreeLookCam freeLookScript;
+        EnemyScript enemyScript;
         public AutoCam autoCamScript;
 
         public Camera mainCamera;
@@ -27,6 +28,14 @@ namespace UnityStandardAssets.Cameras
         // Update is called once per frame
         void Update()
         {
+            if(lockedOn)
+            {
+                if(enemyScript.isDead)
+                {
+                    lockedOn = false;
+                    freeLookScript.m_LockedOn = false;
+                }
+            }
             if (characterActions.LockOn.WasPressed == true && freeLookScript.m_LockedOn == false)
             {
                 Ray ray = mainCamera.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0));
@@ -34,12 +43,14 @@ namespace UnityStandardAssets.Cameras
                 //Debug.DrawRay(mainCamera.transform.position, Vector3.forward * 10, Color.white);
                 if (Physics.Raycast(ray, out hit, Mathf.Infinity))
                 {
+                    EnemyScript tempEnemy = hit.transform.GetComponent<EnemyScript>();
                     print("Im looking at " + hit.transform.name);
-                    if (hit.transform.tag == "Enemy")
+                    if (hit.transform.tag == "Enemy" && tempEnemy.isDead == false)
                     {
                         freeLookScript.m_LockedOn = true;
                         lockedOn = true;
                         freeLookScript.target = hit.transform;
+                        enemyScript = tempEnemy;
                         //freeLookScript.enabled = false;
                         //autoCamScript.enabled = true;
                        // autoCamScript.LockOn(hit.transform);

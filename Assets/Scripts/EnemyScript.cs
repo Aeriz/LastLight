@@ -53,8 +53,8 @@ public class EnemyScript : MonoBehaviour
         }
         if(timer >= attackSpeed && inRange && currentHealth > 0 && aggro && !stunned)
         {
-            attack();
-            attackBool = true;
+            //attack();
+            //attackBool = true;
         }
         if(currentHealth > 0 && playerHealth.currenthealth > 0 && aggro && !stunned)
         {
@@ -70,10 +70,7 @@ public class EnemyScript : MonoBehaviour
                 stunTimer = 0;
             }
         }
-        else
-        {
-            nav.enabled = false;
-        }
+
 
 	}
 
@@ -114,7 +111,7 @@ public class EnemyScript : MonoBehaviour
 
             }
             //Check if enemies in sight and range are aggro'd, if so, goes to the enemy 
-            if (hitColliders[i].tag == "Enemy")
+            if (hitColliders[i].tag == "Enemy" && !aggro)
             {
                 EnemyScript enemy = hitColliders[i].GetComponent<EnemyScript>();
                 RaycastHit hit;
@@ -125,12 +122,12 @@ public class EnemyScript : MonoBehaviour
                 {
                     if (hit.collider.tag == "Enemy")
                     {
-                        if (enemy.aggro && !playerInRange)
+                        if (enemy.aggro && enemy.playerInRange)
                         {
                             aggro = true;
                             nav.enabled = true;
                             lastKnowFriendlyLocation = hit.collider.transform.position;
-                            nav.SetDestination(hitColliders[i].transform.position);
+                            nav.SetDestination(player.transform.position);
                             break;
                         }
                         /*
@@ -199,9 +196,11 @@ public class EnemyScript : MonoBehaviour
     public void Death()
     {
         //play death animation here
+        nav.enabled = false;
         isDead = true;
         m_Rigidbody.isKinematic = false;
         m_Rigidbody.velocity = new Vector3(3, 10, 0);
+
 
     }
 }
