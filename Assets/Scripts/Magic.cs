@@ -25,8 +25,11 @@ public class Magic : MonoBehaviour
     float AOECoolDown = 0;
 
     GameObject player;
+    public GameObject camera;
     ThirdPersonUserControl thirdPersonScript;
     Mana_Stamina mana;
+
+    float mergeTime = 5;
 
 
     // Use this for initialization
@@ -39,7 +42,7 @@ public class Magic : MonoBehaviour
         characterActions.AOESpell.AddDefaultBinding(Key.Key2);
         mana = GetComponent<Mana_Stamina>();
 
-
+        camera = GameObject.FindGameObjectWithTag("BaseCamera");
         player = GameObject.FindGameObjectWithTag("Player");
         thirdPersonScript = player.GetComponentInChildren<ThirdPersonUserControl>();
     }
@@ -49,15 +52,16 @@ public class Magic : MonoBehaviour
     {
         if (characterActions.beamSpell.IsPressed && beamCoolDown <= 0 && (mana.currentMana - beamCost) >= 0)
         {
-            mana.useMana(beamCost);
-            thirdPersonScript.canPushMirror = true;
-            beamCoolDown = 5;
-            firing = true;
-            line.enabled = true;
-            line.SetPosition(0, new Vector3(transform.position.x, transform.position.y + 1, transform.position.z));
-            line.SetPosition(1, new Vector3(transform.position.x, transform.position.y + 1, transform.position.z) + transform.forward * distance);
-            line.SetWidth(0.1f, 0.1f);
-            beamSpell();
+                merge(mergeTime);
+                mana.useMana(beamCost);
+                thirdPersonScript.canPushMirror = true;
+                beamCoolDown = 5;
+                firing = true;
+                line.enabled = true;
+                line.SetPosition(0, new Vector3(transform.position.x, transform.position.y + 1, transform.position.z));
+                line.SetPosition(1, new Vector3(transform.position.x, transform.position.y + 1, transform.position.z) + transform.forward * distance);
+                line.SetWidth(0.1f, 0.1f);
+                beamSpell();
         }
         if(beamCoolDown > 0)
         {
@@ -140,5 +144,18 @@ public class Magic : MonoBehaviour
             }
             i++;
         }
+    }
+
+    void merge(float seconds)
+    {
+        float timer = seconds;
+        Quaternion fromRotation = player.transform.rotation;
+
+        while(timer > 0)
+        {
+            player.transform.rotation = Quaternion.RotateTowards(fromRotation, camera.transform.rotation, (seconds - timer)/seconds);
+            timer -= Time.deltaTime;
+        }
+
     }
 }

@@ -5346,55 +5346,6 @@ MeshCollider:
   serializedVersion: 2
   m_Convex: 0
   m_Mesh: {fileID: 4300000, guid: 867a6c25542c91c439428254e8004d12, type: 3}
-<<<<<<< HEAD
-=======
---- !u!1 &1034744329
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 1000010977598078, guid: a3d7e317d4e2bf5449dcd2f8e7d0a974,
-    type: 2}
-  m_PrefabInternal: {fileID: 1570150360}
-  serializedVersion: 4
-  m_Component:
-  - 4: {fileID: 1034744331}
-  - 114: {fileID: 1034744330}
-  m_Layer: 0
-  m_Name: SaveGame
-  m_TagString: SaveGame
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1034744330
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 114000011665814878, guid: a3d7e317d4e2bf5449dcd2f8e7d0a974,
-    type: 2}
-  m_PrefabInternal: {fileID: 1570150360}
-  m_GameObject: {fileID: 1034744329}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 37e515afb1d7ce84fa9bed3473747629, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  player: {fileID: 0}
-  mirrors: []
-  loadedMirrors: []
---- !u!4 &1034744331
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 4000012674706722, guid: a3d7e317d4e2bf5449dcd2f8e7d0a974,
-    type: 2}
-  m_PrefabInternal: {fileID: 1570150360}
-  m_GameObject: {fileID: 1034744329}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3.0728416, y: 2.3933792, z: -65.583336}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 13
->>>>>>> 91c9f9fa35fccb05c5f238d9bd36ddb22519720d
 --- !u!1 &1046178947
 GameObject:
   m_ObjectHideFlags: 0
