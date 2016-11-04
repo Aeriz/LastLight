@@ -88,16 +88,16 @@ namespace UnityStandardAssets.Cameras
         {
             if (m_Target == null) return;
             // Move the rig towards target position.
-           
+           /*
             if(m_LockedOn)
             {
                 Vector3 targetPosition = new Vector3(1, 0, 0);
-                transform.position = Vector3.Lerp(transform.position, m_Target.position + targetPosition, deltaTime * m_MoveSpeed);
-            }
+                transform.position = Vector3.Lerp(transform.positiona
             else
             {
+            */
                 transform.position = Vector3.Lerp(transform.position, m_Target.position, deltaTime * m_MoveSpeed);
-            }
+            //}
         }
 
 

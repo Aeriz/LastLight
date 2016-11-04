@@ -111,7 +111,7 @@ public class EnemyScript : MonoBehaviour
 
             }
             //Check if enemies in sight and range are aggro'd, if so, goes to the enemy 
-            if (hitColliders[i].tag == "Enemy" && !aggro)
+            if (hitColliders[i].tag == "Enemy")
             {
                 EnemyScript enemy = hitColliders[i].GetComponent<EnemyScript>();
                 RaycastHit hit;

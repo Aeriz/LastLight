@@ -85,6 +85,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
         private void FixedUpdate()
         {
             lockedOn = freeCamScript.m_LockedOn;
+
             Debug.DrawLine(transform.position, transform.forward);
             // read inputs
             float h = CrossPlatformInputManager.GetAxis("Horizontal");

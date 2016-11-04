@@ -48,11 +48,13 @@ namespace VolumetricLines
                 mesh[i].enabled = false;
             }
             */
+            
             for (int i = 0; i < lines.Length; i++)
             {
                 LineRenderer tempLine = lines[i].GetComponent<LineRenderer>();
                 tempLine.enabled = false;
             }
+            
             if(lenses.Length < 1)
                 {
                 for (int i = 0; i < lenses.Length; i++)
@@ -116,6 +118,7 @@ namespace VolumetricLines
                 }
                 else if (hit.transform.tag == "PuzzleKey")
                 {
+                    j++;
                     KeyRayTest(hit, j, tempLight.colour);
                 }
                 else if (hit.transform.tag == "LensOne" || hit.transform.tag == "LensTwo")
@@ -165,6 +168,7 @@ namespace VolumetricLines
                 }
                 else if (hit.transform.tag == "PuzzleKey")
                 {
+                    j++;
                     KeyRayTest(hit, j, colour);
                 }
                 else if (hit.transform.tag == "LensOne" || hit.transform.tag == "LensTwo")
@@ -249,6 +253,7 @@ namespace VolumetricLines
                 }
                 else if (hit.transform.tag == "PuzzleKey")
                 {
+                    j++;
                     KeyRayTest(hit, j, colour);
                 }
                 else

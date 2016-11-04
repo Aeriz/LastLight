@@ -17,6 +17,7 @@ TagManager:
   - SaveGame
   - Collectable
   - KillQuest
+  - AOEAttack
   layers:
   - Default
   - TransparentFX
