@@ -18,6 +18,8 @@ TagManager:
   - Collectable
   - KillQuest
   - AOEAttack
+  - CollectQuest
+  - CourierQuest
   layers:
   - Default
   - TransparentFX
