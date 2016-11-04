@@ -4,7 +4,7 @@ using VolumetricLines;
 
 public class PyxisReticulumManager : MonoBehaviour
 {
-
+    public GameObject gateCol;
     public Animator anim;
 
     // Use this for initialization
@@ -18,6 +18,7 @@ public class PyxisReticulumManager : MonoBehaviour
     {
         if (GameObject.Find("Puzzle").GetComponent<Puzzle>().puzzleComplete == true)
         {
+            gateCol.SetActive(false);
             anim.SetBool("GateRight", true);
         }
     }

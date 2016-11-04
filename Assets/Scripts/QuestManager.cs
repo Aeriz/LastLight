@@ -93,5 +93,8 @@ public class QuestManager : MonoBehaviour {
         questActive[giver] = true;
         Cursor.visible = false;
         onQuest = true;
+
+        questSpeech.gameObject.SetActive(false);
+        questAccept.gameObject.SetActive(false);
     }
 }

@@ -43,6 +43,7 @@ GameObject:
   - 54: {fileID: 54000012958675976}
   - 114: {fileID: 114000011358429698}
   - 195: {fileID: 195000013402721112}
+  - 95: {fileID: 95000012542627378}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Enemy
@@ -57,7 +58,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000013908132092}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -18.8, y: 1.039, z: 68.9}
+  m_LocalPosition: {x: 0.013587952, y: 0.81167984, z: 2.897873}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children:
@@ -112,7 +113,7 @@ MeshFilter:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000013908132092}
-  m_Mesh: {fileID: 10208, guid: 0000000000000000e000000000000000, type: 0}
+  m_Mesh: {fileID: 4300000, guid: 692a29868bb518547894a61d12b1a5ec, type: 3}
 --- !u!54 &54000012958675976
 Rigidbody:
   m_ObjectHideFlags: 1
@@ -128,6 +129,23 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!95 &95000012542627378
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000013908132092}
+  m_Enabled: 1
+  m_Avatar: {fileID: 9000000, guid: 692a29868bb518547894a61d12b1a5ec, type: 3}
+  m_Controller: {fileID: 0}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
 --- !u!114 &114000011358429698
 MonoBehaviour:
   m_ObjectHideFlags: 1

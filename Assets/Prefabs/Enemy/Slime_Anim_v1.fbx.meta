@@ -1,0 +1,423 @@
+fileFormatVersion: 2
+guid: 692a29868bb518547894a61d12b1a5ec
+timeCreated: 1478233445
+licenseType: Free
+ModelImporter:
+  serializedVersion: 19
+  fileIDToRecycleName:
+    100000: Body_GRP
+    100002: Body_JNT
+    100004: Jaw_Lower_GRP
+    100006: Jaw_Lower_JNT
+    100008: Jaw_upper_GRP
+    100010: Jaw_upper_JNT
+    100012: Root_GRP
+    100014: Root_JNT
+    100016: //RootNode
+    100018: Slime_Body
+    100020: squash1Handle
+    100022: Tail_Base_JNT
+    100024: Tail_end_JNT
+    100026: Tail_GRP
+    100028: Tail_GRP1
+    100030: Tail_GRP2
+    100032: Tail_Mid_JNT
+    400000: Body_GRP
+    400002: Body_JNT
+    400004: Jaw_Lower_GRP
+    400006: Jaw_Lower_JNT
+    400008: Jaw_upper_GRP
+    400010: Jaw_upper_JNT
+    400012: Root_GRP
+    400014: Root_JNT
+    400016: //RootNode
+    400018: Slime_Body
+    400020: squash1Handle
+    400022: Tail_Base_JNT
+    400024: Tail_end_JNT
+    400026: Tail_GRP
+    400028: Tail_GRP1
+    400030: Tail_GRP2
+    400032: Tail_Mid_JNT
+    4300000: Slime_Body
+    7400000: Move
+    7400002: Attack
+    7400004: Idle
+    7400006: Attacked
+    7400008: Death
+    9500000: //RootNode
+    13700000: Slime_Body
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: Move
+      takeName: Take 001
+      firstFrame: 1
+      lastFrame: 156
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Root_GRP
+        weight: 1
+      - path: Root_GRP/Root_JNT
+        weight: 1
+      - path: Root_GRP/Root_JNT/Body_GRP
+        weight: 1
+      - path: Root_GRP/Root_JNT/Body_GRP/Body_JNT
+        weight: 1
+      - path: Root_GRP/Root_JNT/Body_GRP/Body_JNT/Tail_GRP
+        weight: 1
+      - path: Root_GRP/Root_JNT/Body_GRP/Body_JNT/Tail_GRP/Tail_Base_JNT
+        weight: 1
+      - path: Root_GRP/Root_JNT/Body_GRP/Body_JNT/Tail_GRP/Tail_Base_JNT/Tail_GRP1
+        weight: 1
+      - path: Root_GRP/Root_JNT/Body_GRP/Body_JNT/Tail_GRP/Tail_Base_JNT/Tail_GRP1/Tail_Mid_JNT
+        weight: 1
+      - path: Root_GRP/Root_JNT/Body_GRP/Body_JNT/Tail_GRP/Tail_Base_JNT/Tail_GRP1/Tail_Mid_JNT/Tail_GRP2
+        weight: 1
+      - path: Root_GRP/Root_JNT/Body_GRP/Body_JNT/Tail_GRP/Tail_Base_JNT/Tail_GRP1/Tail_Mid_JNT/Tail_GRP2/Tail_end_JNT
+        weight: 1
+      - path: Root_GRP/Root_JNT/Jaw_Lower_GRP
+        weight: 1
+      - path: Root_GRP/Root_JNT/Jaw_Lower_GRP/Jaw_Lower_JNT
+        weight: 1
+      - path: Root_GRP/Root_JNT/Jaw_upper_GRP
+        weight: 1
+      - path: Root_GRP/Root_JNT/Jaw_upper_GRP/Jaw_upper_JNT
+        weight: 1
+      - path: Root_GRP/Root_JNT/squash1Handle
+        weight: 1
+      - path: Slime_Body
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 1
+    - serializedVersion: 16
+      name: Attack
+      takeName: Take 001
+      firstFrame: 158
+      lastFrame: 349
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Root_GRP
+        weight: 1
+      - path: Root_GRP/Root_JNT
+        weight: 1
+      - path: Root_GRP/Root_JNT/Body_GRP
+        weight: 1
+      - path: Root_GRP/Root_JNT/Body_GRP/Body_JNT
+        weight: 1
+      - path: Root_GRP/Root_JNT/Body_GRP/Body_JNT/Tail_GRP
+        weight: 1
+      - path: Root_GRP/Root_JNT/Body_GRP/Body_JNT/Tail_GRP/Tail_Base_JNT
+        weight: 1
+      - path: Root_GRP/Root_JNT/Body_GRP/Body_JNT/Tail_GRP/Tail_Base_JNT/Tail_GRP1
+        weight: 1
+      - path: Root_GRP/Root_JNT/Body_GRP/Body_JNT/Tail_GRP/Tail_Base_JNT/Tail_GRP1/Tail_Mid_JNT
+        weight: 1
+      - path: Root_GRP/Root_JNT/Body_GRP/Body_JNT/Tail_GRP/Tail_Base_JNT/Tail_GRP1/Tail_Mid_JNT/Tail_GRP2
+        weight: 1
+      - path: Root_GRP/Root_JNT/Body_GRP/Body_JNT/Tail_GRP/Tail_Base_JNT/Tail_GRP1/Tail_Mid_JNT/Tail_GRP2/Tail_end_JNT
+        weight: 1
+      - path: Root_GRP/Root_JNT/Jaw_Lower_GRP
+        weight: 1
+      - path: Root_GRP/Root_JNT/Jaw_Lower_GRP/Jaw_Lower_JNT
+        weight: 1
+      - path: Root_GRP/Root_JNT/Jaw_upper_GRP
+        weight: 1
+      - path: Root_GRP/Root_JNT/Jaw_upper_GRP/Jaw_upper_JNT
+        weight: 1
+      - path: Root_GRP/Root_JNT/squash1Handle
+        weight: 1
+      - path: Slime_Body
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 1
+    - serializedVersion: 16
+      name: Idle
+      takeName: Take 001
+      firstFrame: 350
+      lastFrame: 591
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Root_GRP
+        weight: 1
+      - path: Root_GRP/Root_JNT
+        weight: 1
+      - path: Root_GRP/Root_JNT/Body_GRP
+        weight: 1
+      - path: Root_GRP/Root_JNT/Body_GRP/Body_JNT
+        weight: 1
+      - path: Root_GRP/Root_JNT/Body_GRP/Body_JNT/Tail_GRP
+        weight: 1
+      - path: Root_GRP/Root_JNT/Body_GRP/Body_JNT/Tail_GRP/Tail_Base_JNT
+        weight: 1
+      - path: Root_GRP/Root_JNT/Body_GRP/Body_JNT/Tail_GRP/Tail_Base_JNT/Tail_GRP1
+        weight: 1
+      - path: Root_GRP/Root_JNT/Body_GRP/Body_JNT/Tail_GRP/Tail_Base_JNT/Tail_GRP1/Tail_Mid_JNT
+        weight: 1
+      - path: Root_GRP/Root_JNT/Body_GRP/Body_JNT/Tail_GRP/Tail_Base_JNT/Tail_GRP1/Tail_Mid_JNT/Tail_GRP2
+        weight: 1
+      - path: Root_GRP/Root_JNT/Body_GRP/Body_JNT/Tail_GRP/Tail_Base_JNT/Tail_GRP1/Tail_Mid_JNT/Tail_GRP2/Tail_end_JNT
+        weight: 1
+      - path: Root_GRP/Root_JNT/Jaw_Lower_GRP
+        weight: 1
+      - path: Root_GRP/Root_JNT/Jaw_Lower_GRP/Jaw_Lower_JNT
+        weight: 1
+      - path: Root_GRP/Root_JNT/Jaw_upper_GRP
+        weight: 1
+      - path: Root_GRP/Root_JNT/Jaw_upper_GRP/Jaw_upper_JNT
+        weight: 1
+      - path: Root_GRP/Root_JNT/squash1Handle
+        weight: 1
+      - path: Slime_Body
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 1
+    - serializedVersion: 16
+      name: Attacked
+      takeName: Take 001
+      firstFrame: 591
+      lastFrame: 755
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Root_GRP
+        weight: 1
+      - path: Root_GRP/Root_JNT
+        weight: 1
+      - path: Root_GRP/Root_JNT/Body_GRP
+        weight: 1
+      - path: Root_GRP/Root_JNT/Body_GRP/Body_JNT
+        weight: 1
+      - path: Root_GRP/Root_JNT/Body_GRP/Body_JNT/Tail_GRP
+        weight: 1
+      - path: Root_GRP/Root_JNT/Body_GRP/Body_JNT/Tail_GRP/Tail_Base_JNT
+        weight: 1
+      - path: Root_GRP/Root_JNT/Body_GRP/Body_JNT/Tail_GRP/Tail_Base_JNT/Tail_GRP1
+        weight: 1
+      - path: Root_GRP/Root_JNT/Body_GRP/Body_JNT/Tail_GRP/Tail_Base_JNT/Tail_GRP1/Tail_Mid_JNT
+        weight: 1
+      - path: Root_GRP/Root_JNT/Body_GRP/Body_JNT/Tail_GRP/Tail_Base_JNT/Tail_GRP1/Tail_Mid_JNT/Tail_GRP2
+        weight: 1
+      - path: Root_GRP/Root_JNT/Body_GRP/Body_JNT/Tail_GRP/Tail_Base_JNT/Tail_GRP1/Tail_Mid_JNT/Tail_GRP2/Tail_end_JNT
+        weight: 1
+      - path: Root_GRP/Root_JNT/Jaw_Lower_GRP
+        weight: 1
+      - path: Root_GRP/Root_JNT/Jaw_Lower_GRP/Jaw_Lower_JNT
+        weight: 1
+      - path: Root_GRP/Root_JNT/Jaw_upper_GRP
+        weight: 1
+      - path: Root_GRP/Root_JNT/Jaw_upper_GRP/Jaw_upper_JNT
+        weight: 1
+      - path: Root_GRP/Root_JNT/squash1Handle
+        weight: 1
+      - path: Slime_Body
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 1
+    - serializedVersion: 16
+      name: Death
+      takeName: Take 001
+      firstFrame: 755
+      lastFrame: 1100
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Root_GRP
+        weight: 1
+      - path: Root_GRP/Root_JNT
+        weight: 1
+      - path: Root_GRP/Root_JNT/Body_GRP
+        weight: 1
+      - path: Root_GRP/Root_JNT/Body_GRP/Body_JNT
+        weight: 1
+      - path: Root_GRP/Root_JNT/Body_GRP/Body_JNT/Tail_GRP
+        weight: 1
+      - path: Root_GRP/Root_JNT/Body_GRP/Body_JNT/Tail_GRP/Tail_Base_JNT
+        weight: 1
+      - path: Root_GRP/Root_JNT/Body_GRP/Body_JNT/Tail_GRP/Tail_Base_JNT/Tail_GRP1
+        weight: 1
+      - path: Root_GRP/Root_JNT/Body_GRP/Body_JNT/Tail_GRP/Tail_Base_JNT/Tail_GRP1/Tail_Mid_JNT
+        weight: 1
+      - path: Root_GRP/Root_JNT/Body_GRP/Body_JNT/Tail_GRP/Tail_Base_JNT/Tail_GRP1/Tail_Mid_JNT/Tail_GRP2
+        weight: 1
+      - path: Root_GRP/Root_JNT/Body_GRP/Body_JNT/Tail_GRP/Tail_Base_JNT/Tail_GRP1/Tail_Mid_JNT/Tail_GRP2/Tail_end_JNT
+        weight: 1
+      - path: Root_GRP/Root_JNT/Jaw_Lower_GRP
+        weight: 1
+      - path: Root_GRP/Root_JNT/Jaw_Lower_GRP/Jaw_Lower_JNT
+        weight: 1
+      - path: Root_GRP/Root_JNT/Jaw_upper_GRP
+        weight: 1
+      - path: Root_GRP/Root_JNT/Jaw_upper_GRP/Jaw_upper_JNT
+        weight: 1
+      - path: Root_GRP/Root_JNT/squash1Handle
+        weight: 1
+      - path: Slime_Body
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 1
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
