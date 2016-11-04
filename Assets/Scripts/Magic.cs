@@ -28,6 +28,10 @@ public class Magic : MonoBehaviour
     public GameObject camera;
     ThirdPersonUserControl thirdPersonScript;
     Mana_Stamina mana;
+    GameObject AOEparticle;
+    float AOEtimer = 2.3f;
+    bool AOE;
+    public ParticleSystem ps;
 
     float mergeTime = 5;
 
@@ -35,13 +39,14 @@ public class Magic : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        
+        AOEparticle = GameObject.FindGameObjectWithTag("AOEAttack");
+        ps = AOEparticle.GetComponentInChildren<ParticleSystem>();
         line = lineObject.GetComponent<LineRenderer>();
         characterActions = new MyCharacterActions();
         characterActions.beamSpell.AddDefaultBinding(Key.Key1);
         characterActions.AOESpell.AddDefaultBinding(Key.Key2);
         mana = GetComponent<Mana_Stamina>();
-
+        ps.Pause();
         camera = GameObject.FindGameObjectWithTag("BaseCamera");
         player = GameObject.FindGameObjectWithTag("Player");
         thirdPersonScript = player.GetComponentInChildren<ThirdPersonUserControl>();
@@ -70,10 +75,30 @@ public class Magic : MonoBehaviour
 
         if (characterActions.AOESpell.IsPressed && AOECoolDown <= 0 && (mana.currentMana - AOECost) >= 0)
         {
+            AOE = true;
+            thirdPersonScript.canPushMirror = true;
+            /*
             mana.useMana(AOECost);
             //thirdPersonScript.canPushMirror = true;
             AOECoolDown = 5;
             AOESpell();
+            */
+        }
+        if(AOE)
+        {
+            AOEtimer -= Time.deltaTime;
+            ps.Play();
+
+            if(AOEtimer < 0)
+            {
+                thirdPersonScript.canPushMirror = false;
+                ps.Pause();
+                ps.time = 0;
+                AOECoolDown = 5;
+                AOESpell();
+                AOE = false;
+                AOEtimer = 2.3f;
+            }
         }
         if (AOECoolDown > 0)
         {
