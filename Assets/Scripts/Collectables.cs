@@ -37,6 +37,11 @@ public class Collectables : MonoBehaviour {
             col.gameObject.SetActive(false);
             gotCollectable = true;
             CamPan();
+
+            if (QuestManager.questActive[1])
+            {
+                QuestManager.questTracker[1] += 1;
+            }
         } 
     }
 

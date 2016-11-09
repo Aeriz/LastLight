@@ -9,6 +9,7 @@ public class QuestManager : MonoBehaviour {
 
     public string[] questText;
     public string[] thankYouText;
+    public string[] inQuestText;
 
     public State[] state;
     public string[] questGiver;
@@ -18,11 +19,12 @@ public class QuestManager : MonoBehaviour {
     public static bool onQuest = false;
 
     public static int[] questGoal = { 5, 1, 1 };
-    int[] questTracker = { 0, 0, 0 };
+    public static int[] questTracker = { 0, 0, 0 };
 
     public GameObject[] exclamationMark;
 
     public Text questSpeech;
+    public Text questTrackerText;
 
     public Button questAccept;
 
@@ -37,19 +39,9 @@ public class QuestManager : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-        if (questActive[0]) // Kill quest
+        if (questActive[giver])
         {
-
-        }
-
-        if (questActive[1]) // Collect quest
-        {
-
-        }
-
-        if (questActive[2]) // Courier quest
-        {
-
+            questTrackerText.text = inQuestText[giver] + questTracker[giver] + "/" + questGoal[giver];
         }
 
 	    if (onQuest)

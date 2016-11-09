@@ -3,13 +3,15 @@ using System.Collections;
 
 public class PortalToPerseus : MonoBehaviour {
 
+    public GameObject loadScreen;
+
 	// Use this for initialization
 	void Start () {
-	
-	}
-	
-	// Update is called once per frame
-	void Update () {
+        loadScreen.SetActive(false);
+    }
+
+    // Update is called once per frame
+    void Update () {
 	
 	}
 
@@ -18,6 +20,7 @@ public class PortalToPerseus : MonoBehaviour {
         if (col.gameObject.tag == "Player")
         {
             Application.LoadLevel(2);
+            loadScreen.SetActive(true);
         }
     }
 }

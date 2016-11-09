@@ -195,6 +195,10 @@ public class EnemyScript : MonoBehaviour
 
     public void Death()
     {
+        if (QuestManager.questActive[0])
+        {
+            QuestManager.questTracker[0] += 1;
+        }
         //play death animation here
         nav.enabled = false;
         isDead = true;
