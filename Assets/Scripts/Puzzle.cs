@@ -172,30 +172,28 @@ namespace VolumetricLines
                 //linesScripts[i].m_endPos = hit.point;
                 //linesScripts[i].SetStartAndEndPoints(raySource.transform.position, hit.point);
                 reflectionAngle = Vector3.Reflect(incidenceAngle, hit.normal);
+                j++;
                 if (hit.transform.tag == "Mirror")
                 {
-                    j++;
+
                     MirrorRayTest(hit, j, colour);
                 }
                 else if (hit.transform.tag == "PuzzleKey")
                 {
-                    j++;
+
                     KeyRayTest(hit, j, colour);
                 }
                 else if (hit.transform.tag == "LensOne" || hit.transform.tag == "LensTwo")
                 {
                     LensScript tempLens = hit.collider.GetComponentInParent<LensScript>();
-                    if (tempLens.lightBeamInt == 0)
+                    if (tempLens.lightBeamInt != 0)
                     {
-                        j++;
+                        j--;
                     }
                     
                     LensRayTest(hit, j, colour);
                 }
-                else
-                {
-                    j++;
-                }
+
                 return true;
             }
             
@@ -217,11 +215,14 @@ namespace VolumetricLines
             }
             if(raySource.collider.tag == "LensOne")
             {
+
                 temp = tempLens.lensTwo.transform;
+                temp.transform.position = new Vector3(temp.transform.position.x, raySource.point.y, temp.transform.position.z);
             }
             else
             {
-                temp = tempLens.lensOne.transform;  
+                temp = tempLens.lensOne.transform;
+                temp.transform.position = new Vector3(temp.transform.position.x, raySource.point.y, temp.transform.position.z);
             }
             if(tempLens.lightBeamInt == 0)
             {
@@ -255,9 +256,9 @@ namespace VolumetricLines
             if (Physics.Raycast(temp.position, temp.right, out hit, Mathf.Infinity))
             {
                 incidenceAngle = hit.point - raySource.point;
-                Debug.DrawRay(raySource.point, incidenceAngle, Color.white);
+                Debug.DrawRay(temp.position, incidenceAngle, Color.white);
                 tempLine.enabled = true;
-                tempLine.SetPosition(0, raySource.point);
+                tempLine.SetPosition(0, temp.position);
                 tempLine.SetPosition(1, hit.point);
                 tempBeam.changeColor(colour);
                 //linesScripts[i].enabled = true;
