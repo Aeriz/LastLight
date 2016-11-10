@@ -30,6 +30,9 @@ public class QuestManager : MonoBehaviour {
 
     int giver;
 
+    Vector3 dest;
+    Vector3 destTwo;
+
 	// Use this for initialization
 	void Start () {
         questSpeech.gameObject.SetActive(false);
@@ -38,6 +41,11 @@ public class QuestManager : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+
+        /*if (Vector3.Distance(GameObject.Find("QuestSign").transform.position, transform.position))
+        {
+
+        }*/
 
         if (questActive[giver])
         {
@@ -59,7 +67,7 @@ public class QuestManager : MonoBehaviour {
         }
 	}
 
-    void OnTriggerEnter(Collider col)
+    void OnCollisionEnter(Collision col)
     {
         if (col.gameObject.tag == questGiver[0] || col.gameObject.tag == questGiver[1] || col.gameObject.tag == questGiver[2])
         {
@@ -106,11 +114,14 @@ public class QuestManager : MonoBehaviour {
         }     
     }
 
-    void OnTriggerExit()
+    void OnCollisionExit(Collision col)
     {
-        questSpeech.gameObject.SetActive(false);
-        questAccept.gameObject.SetActive(false);
-        Cursor.visible = false;
+        if (col.gameObject.tag == questGiver[0] || col.gameObject.tag == questGiver[1] || col.gameObject.tag == questGiver[2])
+        {
+            questSpeech.gameObject.SetActive(false);
+            questAccept.gameObject.SetActive(false);
+            Cursor.visible = false;
+        }
     }
 
     public void Quest()
