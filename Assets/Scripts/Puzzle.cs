@@ -22,6 +22,11 @@ namespace VolumetricLines
         Vector3 reflectionAngle;
         public bool puzzleComplete = false;
 
+
+        public Vector4 lensColour1;
+        public Vector4 lensColour2;
+        public Vector4 lensColour;
+
         public int j = 0;
         // Use this for initialization
         void Start()
@@ -55,12 +60,18 @@ namespace VolumetricLines
                 tempLine.enabled = false;
             }
             
-            if(lenses.Length < 1)
+            if(lenses.Length > 0)
                 {
                 for (int i = 0; i < lenses.Length; i++)
                 {
                     LensScript temp = lenses[i].GetComponent<LensScript>();
                     temp.beamCounter = 0;
+                    temp.lightBeamInt = 0;
+                    for(int z = 0; z <= 1; z++)
+                    {
+                        temp.colours[z] = new Vector4(0, 0, 0, 0);
+                 
+                    }
                 }
             }
             for (int i = 0; i < lights.Length; i++)
@@ -110,25 +121,25 @@ namespace VolumetricLines
                 //linesScripts[i].m_startPos = raySource.transform.position;
                 //linesScripts[i].m_endPos = hit.point;
                 //linesScripts[i].SetStartAndEndPoints(raySource.transform.position, hit.point);
-
+                j++;
                 if (hit.transform.tag == "Mirror")
                 {
-                    j++;
+                    
                     MirrorRayTest(hit, j, tempLight.colour);
                 }
                 else if (hit.transform.tag == "PuzzleKey")
                 {
-                    j++;
+                    
                     KeyRayTest(hit, j, tempLight.colour);
                 }
                 else if (hit.transform.tag == "LensOne" || hit.transform.tag == "LensTwo")
                 {
-                    j++;
+                    LensScript tempLens = hit.collider.GetComponentInParent<LensScript>();
+                    if (tempLens.lightBeamInt != 0)
+                    {
+                        j--;
+                    }
                     LensRayTest(hit, j, tempLight.colour);
-                }
-                else
-                {
-                    j++;
                 }
                 return true;
 
@@ -173,7 +184,12 @@ namespace VolumetricLines
                 }
                 else if (hit.transform.tag == "LensOne" || hit.transform.tag == "LensTwo")
                 {
-                    j++;
+                    LensScript tempLens = hit.collider.GetComponentInParent<LensScript>();
+                    if (tempLens.lightBeamInt == 0)
+                    {
+                        j++;
+                    }
+                    
                     LensRayTest(hit, j, colour);
                 }
                 else
@@ -211,6 +227,9 @@ namespace VolumetricLines
             {
                 tempLens.lightBeamInt = j;
             }
+     
+            lensColour1 = tempLens.colours[0];
+            lensColour2 = tempLens.colours[1];
             colour = tempLens.colours[0] + tempLens.colours[1];
             LightbeamScript tempBeam = lines[tempLens.lightBeamInt].GetComponent<LightbeamScript>();
             LineRenderer tempLine = lines[tempLens.lightBeamInt].GetComponent<LineRenderer>();
@@ -232,6 +251,7 @@ namespace VolumetricLines
             {
                 colour.a = 1;
             }
+            lensColour = colour;
             if (Physics.Raycast(temp.position, temp.right, out hit, Mathf.Infinity))
             {
                 incidenceAngle = hit.point - raySource.point;
@@ -246,19 +266,14 @@ namespace VolumetricLines
                 //linesScripts[i].m_endPos = hit.point;
                 //linesScripts[i].SetStartAndEndPoints(raySource.transform.position, hit.point);
                 reflectionAngle = Vector3.Reflect(incidenceAngle, hit.normal);
+                j++;
                 if (hit.transform.tag == "Mirror")
                 {
-                    j++;
                     MirrorRayTest(hit, j, colour);
                 }
                 else if (hit.transform.tag == "PuzzleKey")
                 {
-                    j++;
                     KeyRayTest(hit, j, colour);
-                }
-                else
-                {
-                    j++;
                 }
                 return true;
             }
