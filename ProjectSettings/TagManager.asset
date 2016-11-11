@@ -20,6 +20,8 @@ TagManager:
   - AOEAttack
   - CollectQuest
   - CourierQuest
+  - TotalMirror
+  - Terrain
   layers:
   - Default
   - TransparentFX
@@ -32,7 +34,7 @@ TagManager:
   - Minimap
   - PuzzleKey
   - EnemyColliders
-  - 
+  - Living
   - 
   - 
   - 

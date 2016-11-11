@@ -50,12 +50,12 @@ public class LightSource : MonoBehaviour {
             if (thirdPersonScript.canPushMirror)
             {
                 freeLookScript.SetTarget(this.transform);
-                wallClipScript.closestDistance = 7;
+                //wallClipScript.closestDistance = 7;
             }
             else
             {
                 freeLookScript.SetTarget(player.transform);
-                wallClipScript.closestDistance = 1f;
+                //wallClipScript.closestDistance = 1f;
             }
 
         }
