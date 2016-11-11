@@ -3,10 +3,12 @@ using System.Collections;
 
 public class PortalToPyxis : MonoBehaviour {
 
-	// Use this for initialization
-	void Start () {
-	
-	}
+    //public GameObject loadingScreen;
+
+    // Use this for initialization
+    void Start () {
+        //loadingScreen.SetActive(false);
+    }
 	
 	// Update is called once per frame
 	void Update () {
@@ -17,6 +19,7 @@ public class PortalToPyxis : MonoBehaviour {
     {
         if (col.gameObject.tag == "Player")
         {
+            //loadingScreen.SetActive(true);
             Application.LoadLevel(1);
         }
     }

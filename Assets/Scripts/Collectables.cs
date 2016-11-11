@@ -12,15 +12,13 @@ public class Collectables : MonoBehaviour {
 
     public static bool gotCollectable;
 
-    ThirdPersonCharacter playerMove;
-    ThirdPersonUserControl playerControl;
-
     // Use this for initialization
     void Start () {
         gotCollectable = false;
         panCam.gameObject.SetActive(false);
         playerCam.gameObject.SetActive(true);
-	}
+
+    }
 	
 	// Update is called once per frame
 	void Update () {
@@ -53,9 +51,12 @@ public class Collectables : MonoBehaviour {
     {
         if (gotCollectable)
         {
+            GameObject.Find("ThirdPersonController").GetComponent<Rigidbody>().isKinematic = true;
+            ThirdPersonUserControl playerControl = GameObject.Find("ThirdPersonController").GetComponent<ThirdPersonUserControl>();
+            ThirdPersonCharacter playerMove = GameObject.Find("ThirdPersonController").GetComponent<ThirdPersonCharacter>();
             playerMove.enabled = false;
             playerControl.enabled = false;
-            GameObject.Find("Player").GetComponent<ThirdPersonCharacter>().enabled = false;
+
             panCam.gameObject.SetActive(true);
             playerCam.gameObject.SetActive(false);
 
@@ -65,6 +66,9 @@ public class Collectables : MonoBehaviour {
 
     void Reset()
     {
+        GameObject.Find("ThirdPersonController").GetComponent<Rigidbody>().isKinematic = false;
+        ThirdPersonUserControl playerControl = GameObject.Find("ThirdPersonController").GetComponent<ThirdPersonUserControl>();
+        ThirdPersonCharacter playerMove = GameObject.Find("ThirdPersonController").GetComponent<ThirdPersonCharacter>();
         playerMove.enabled = true;
         playerControl.enabled = true;
 

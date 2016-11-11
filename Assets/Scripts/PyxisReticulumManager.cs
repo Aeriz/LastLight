@@ -9,11 +9,21 @@ public class PyxisReticulumManager : MonoBehaviour
     public Animator anim;
     public Text companionText;
 
+    public bool resetTutorial;
+
     // Use this for initialization
     void Start()
     {
+        if (resetTutorial)
+        {
+            PlayerPrefs.SetInt("RunTutorial", 0);
+        }
+
         companionText.text = "";
-        StartCoroutine("Companion", 5.0f);
+        if (PlayerPrefs.GetInt("RunTutorial") == 0)
+        {
+            StartCoroutine("Companion", 5.0f);
+        }      
     }
 
     // Update is called once per frame
@@ -50,13 +60,14 @@ public class PyxisReticulumManager : MonoBehaviour
         companionText.text = "Unlock the long-locked gates to Perseus!";
         yield return new WaitForSeconds(waitTime);
         companionText.text = "";
+
+        PlayerPrefs.SetInt("RunTutorial", 1);
     }
 
     void OnTriggerEnter(Collider col)
     {
-        if (col.gameObject.tag == "Player")
+        if (col.gameObject.tag == "Player" && PlayerPrefs.GetInt("RunTutorial") == 0)
         {
-            Debug.Log("PLAYER ENTERED");
             StartCoroutine("CompanionTwo", 5.0f);
         }
     }

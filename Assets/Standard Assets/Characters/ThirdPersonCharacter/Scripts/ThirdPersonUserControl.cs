@@ -14,6 +14,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
         private Vector3 m_Move;
         public int m_Jump = 0;                      // the world-relative desired move direction, calculated from the camForward and user input.
         public bool m_float = false;
+        public bool canFloat = false;
 
         public GameObject camera;
         public FreeLookCam freeCamScript;
@@ -73,7 +74,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
                 {
                     m_float = false;
                 }
-                else if(CrossPlatformInputManager.GetButton("Jump"))
+                else if(CrossPlatformInputManager.GetButton("Jump") && canFloat)
                 {
                     m_float = true;
                 }

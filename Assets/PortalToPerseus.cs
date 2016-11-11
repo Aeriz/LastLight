@@ -19,8 +19,8 @@ public class PortalToPerseus : MonoBehaviour {
     {
         if (col.gameObject.tag == "Player")
         {
-            Application.LoadLevel(2);
             loadScreen.SetActive(true);
+            Application.LoadLevel(2);
         }
     }
 }
