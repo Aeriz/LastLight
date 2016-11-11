@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityStandardAssets.Characters.ThirdPerson;
 
 public class Collectables : MonoBehaviour {
 
@@ -11,8 +12,11 @@ public class Collectables : MonoBehaviour {
 
     public static bool gotCollectable;
 
-	// Use this for initialization
-	void Start () {
+    ThirdPersonCharacter playerMove;
+    ThirdPersonUserControl playerControl;
+
+    // Use this for initialization
+    void Start () {
         gotCollectable = false;
         panCam.gameObject.SetActive(false);
         playerCam.gameObject.SetActive(true);
@@ -49,6 +53,9 @@ public class Collectables : MonoBehaviour {
     {
         if (gotCollectable)
         {
+            playerMove.enabled = false;
+            playerControl.enabled = false;
+            GameObject.Find("Player").GetComponent<ThirdPersonCharacter>().enabled = false;
             panCam.gameObject.SetActive(true);
             playerCam.gameObject.SetActive(false);
 
@@ -58,6 +65,9 @@ public class Collectables : MonoBehaviour {
 
     void Reset()
     {
+        playerMove.enabled = true;
+        playerControl.enabled = true;
+
         gotCollectable = false;
 
         panCam.gameObject.SetActive(false);

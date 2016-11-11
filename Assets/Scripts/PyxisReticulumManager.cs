@@ -43,7 +43,6 @@ public class PyxisReticulumManager : MonoBehaviour
     IEnumerator CompanionTwo(float waitTime)
     {
         companionText.text = "";
-        yield return new WaitForSeconds(waitTime);
         companionText.text = "Only you can use this Prism. \n With it you can manipulate elements of light.";
         yield return new WaitForSeconds(waitTime);
         companionText.text = "Go forth. Test its power. Understand it.";
