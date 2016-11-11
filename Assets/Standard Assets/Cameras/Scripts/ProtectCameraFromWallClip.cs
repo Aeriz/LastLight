@@ -14,6 +14,10 @@ namespace UnityStandardAssets.Cameras
         public bool protecting { get; private set; }    // used for determining if there is an object between the target and the camera
         public string dontClipTag = "Player";           // don't clip against objects with this tag (useful for not clipping against the targeted object)
         public string dontClipTag2 = "Enemy";
+        public string dontClipTag3 = "Terrain";
+        public string dontClipTag4 = "Mirror";
+        public string dontClipTag5 = "Pane";
+        public string dontClipTag6 = "MirrorBase";
 
         private Transform m_Cam;                  // the transform of the camera
         private Transform m_Pivot;                // the point at which the camera pivots around
@@ -23,6 +27,8 @@ namespace UnityStandardAssets.Cameras
         private Ray m_Ray;                        // the ray used in the lateupdate for casting between the camera and the target
         private RaycastHit[] m_Hits;              // the hits between the camera and the target
         private RayHitComparer m_RayHitComparer;  // variable to compare raycast hit distances
+
+        public bool lockedOn;
 
 
         private void Start()
@@ -52,14 +58,29 @@ namespace UnityStandardAssets.Cameras
             bool initialIntersect = false;
             bool hitSomething = false;
 
-            // loop through all the collisions to check if something we care about
-            for (int i = 0; i < cols.Length; i++)
+            if (lockedOn)
             {
-                if ((!cols[i].isTrigger) &&
-                    !(cols[i].attachedRigidbody != null && cols[i].attachedRigidbody.CompareTag(dontClipTag) && cols[i].attachedRigidbody.CompareTag(dontClipTag2)))
+                for (int i = 0; i < cols.Length; i++)
                 {
-                    initialIntersect = true;
-                    break;
+                    if ((!cols[i].isTrigger) &&
+                        !(cols[i].attachedRigidbody != null && !cols[i].attachedRigidbody.CompareTag(dontClipTag3)))
+                    {
+                        initialIntersect = true;
+                        break;
+                    }
+                }
+            }
+            else
+            {
+                // loop through all the collisions to check if something we care about
+                for (int i = 0; i < cols.Length; i++)
+                {
+                    if ((!cols[i].isTrigger) &&
+                        !(cols[i].attachedRigidbody != null && cols[i].attachedRigidbody.CompareTag(dontClipTag) && cols[i].attachedRigidbody.CompareTag(dontClipTag2)))
+                    {
+                        initialIntersect = true;
+                        break;
+                    }
                 }
             }
 

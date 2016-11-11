@@ -207,6 +207,7 @@ namespace VolumetricLines
                 expandLineArray();
             }
             Transform temp;
+            float tempY;
             LensScript tempLens = raySource.collider.GetComponentInParent<LensScript>();
             tempLens.colours[tempLens.beamCounter] = colour;
             if (tempLens.beamCounter < 1)
@@ -215,20 +216,20 @@ namespace VolumetricLines
             }
             if(raySource.collider.tag == "LensOne")
             {
-
                 temp = tempLens.lensTwo.transform;
+                tempY = temp.transform.position.y;
                 temp.transform.position = new Vector3(temp.transform.position.x, raySource.point.y, temp.transform.position.z);
             }
             else
             {
                 temp = tempLens.lensOne.transform;
+                tempY = temp.transform.position.y;
                 temp.transform.position = new Vector3(temp.transform.position.x, raySource.point.y, temp.transform.position.z);
             }
             if(tempLens.lightBeamInt == 0)
             {
                 tempLens.lightBeamInt = j;
             }
-     
             lensColour1 = tempLens.colours[0];
             lensColour2 = tempLens.colours[1];
             colour = tempLens.colours[0] + tempLens.colours[1];
@@ -261,6 +262,7 @@ namespace VolumetricLines
                 tempLine.SetPosition(0, temp.position);
                 tempLine.SetPosition(1, hit.point);
                 tempBeam.changeColor(colour);
+                temp.transform.position = new Vector3(temp.transform.position.x, tempY, temp.transform.position.z);
                 //linesScripts[i].enabled = true;
                 //mesh[i].enabled = true;
                 //linesScripts[i].m_startPos = raySource.transform.position;

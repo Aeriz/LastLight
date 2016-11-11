@@ -9,6 +9,7 @@ public class EnemyScript : MonoBehaviour
     public float attackSpeed = 0.5f;
     public int attackDamage = 10;
     public float aggroRange = 30;
+    public float attackTimer = 0.5f;
     bool inRange;
     float timer;
     float checkAggroTimer = 0;
@@ -26,11 +27,14 @@ public class EnemyScript : MonoBehaviour
     Vector3 lastKnowPlayerLocation = new Vector3(0, 0, 0);
     Vector3 lastKnowFriendlyLocation = new Vector3(0, 0, 0);
     Vector3 enemyWanderRange;
+    CapsuleCollider capsule;
+    public bool damaged;
 
     //EnemyHealth enemyHealth;
     // Use this for initialization
     void Start ()
     {
+        capsule = GetComponent<CapsuleCollider>();
         nav = GetComponent<NavMeshAgent>();
         m_Rigidbody = GetComponent<Rigidbody>();
         currentHealth = startHealth;
@@ -44,6 +48,19 @@ public class EnemyScript : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
     {
+        if(attackBool)
+        {
+            attackTimer -= Time.deltaTime;
+            if(attackTimer < 0)
+            {
+                attack();
+                attackBool = false;
+            }
+        }
+        else
+        {
+            attackTimer = 0.5f;
+        }
        if(!isDead)
         checkEnemyInRange();
          
@@ -51,10 +68,10 @@ public class EnemyScript : MonoBehaviour
         {
             timer += Time.deltaTime;
         }
-        if(timer >= attackSpeed && inRange && currentHealth > 0 && aggro && !stunned)
+        if(timer >= attackSpeed && inRange && currentHealth > 0 && aggro && !stunned && !damaged)
         {
             //attack();
-            //attackBool = true;
+            attackBool = true;
         }
         if(currentHealth > 0 && playerHealth.currenthealth > 0 && aggro && !stunned)
         {
@@ -76,9 +93,9 @@ public class EnemyScript : MonoBehaviour
 
     void checkEnemyInRange()
     {
-        Collider[] hitColliders = Physics.OverlapSphere(enemyWanderRange, aggroRange);
+        Collider[] hitColliders = Physics.OverlapSphere(enemyWanderRange, aggroRange, 11);
         int i = 0;
-        while (i<hitColliders.Length)
+        while (i<=hitColliders.Length)
         {
             //checks if player is in sight and range, if no in sight the enemy will go to players last known location and if it cannot see the player or aggro'd enemies then it will return to its home
             if (hitColliders[i].tag == "Player")
@@ -111,7 +128,7 @@ public class EnemyScript : MonoBehaviour
 
             }
             //Check if enemies in sight and range are aggro'd, if so, goes to the enemy 
-            if (hitColliders[i].tag == "Enemy")
+            if (hitColliders[i].tag == "Enemy" && !aggro)
             {
                 EnemyScript enemy = hitColliders[i].GetComponent<EnemyScript>();
                 RaycastHit hit;
@@ -185,12 +202,14 @@ public class EnemyScript : MonoBehaviour
 
     public void takeDamage(int damage)
     {
+        attackBool = false;
         currentHealth -= damage;
-        
+        m_Rigidbody.AddExplosionForce(100, player.transform.position, 10, 0);
         if (currentHealth < 0 && !isDead)
         {
             Death();
         }
+        damaged = false;
     }
 
     public void Death()
@@ -199,11 +218,12 @@ public class EnemyScript : MonoBehaviour
         {
             QuestManager.questTracker[0] += 1;
         }
+        capsule.enabled = false;
         //play death animation here
         nav.enabled = false;
         isDead = true;
         m_Rigidbody.isKinematic = false;
-        m_Rigidbody.velocity = new Vector3(3, 10, 0);
+        //m_Rigidbody.velocity = new Vector3(3, 10, 0);
 
 
     }

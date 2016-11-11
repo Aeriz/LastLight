@@ -53,12 +53,14 @@ public class MirrorRotate : MonoBehaviour
             if (thirdPersonScript.canPushMirror)
             {
                 freeLookScript.SetTarget(mirrorBase.transform);
-                wallClipScript.closestDistance = 7;
+                // wallClipScript.closestDistance = 7;
+                wallClipScript.lockedOn = true;
             }
             else
             {
                 freeLookScript.SetTarget(player.transform);
-                wallClipScript.closestDistance = 1f;
+                //wallClipScript.closestDistance = 1f;
+                wallClipScript.lockedOn = false;
             }
         }
 

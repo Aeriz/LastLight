@@ -9,6 +9,12 @@ public class Combat : MonoBehaviour {
     public int heavyAttack = 20;
     public float radius = 2;
     float blockRange = 0.7f;
+    public float lightAttackTimer;
+    public float heavyAttackTimer;
+    float LATimer = 0.3f;
+    float HATimer = 0.3f;
+    public bool light = false;
+    public bool heavy = false;
     public bool blocking = false;
     int j = 0;
     Mana_Stamina stamina;
@@ -25,15 +31,35 @@ public class Combat : MonoBehaviour {
 	// Update is called once per frame
 	void Update ()
     {
-        if (characterActions.lightAttack.IsPressed)
+        if (characterActions.lightAttack.IsPressed && !light)
         {
+            light = true;
             attackEnemies(lightAttack, 0.5f);
         }
-        if (characterActions.heavyAttack.IsPressed)
+        if (characterActions.heavyAttack.IsPressed && !heavy)
         {
+            heavy = true;
             attackEnemies(heavyAttack, 0.5f);
         }
-        if(characterActions.block.IsPressed && (stamina.currentStamina - 10) >= 0)
+        if(light)
+        {
+            LATimer -= Time.deltaTime;
+            if(LATimer < 0)
+            {
+                light = false;
+                LATimer = lightAttackTimer;
+            }
+        }
+        if (heavy)
+        {
+            HATimer -= Time.deltaTime;
+            if (HATimer < 0)
+            {
+                heavy = false;
+                HATimer = heavyAttackTimer;
+            }
+        }
+        if (characterActions.block.IsPressed && (stamina.currentStamina - 10) >= 0)
         {
             blockDamage();
             blocking = true;
@@ -73,6 +99,7 @@ public class Combat : MonoBehaviour {
                 if (sidewaysDist > -range && sidewaysDist < range && forwardsDist > 0 && forwardsDist < radius)
                 {
                     EnemyScript enemy = hitColliders[i].GetComponent<EnemyScript>();
+                    enemy.damaged = true;
                     enemy.takeDamage(damage);
                     j++;
                     Debug.Log("hit " + j + " " + sidewaysDist);
