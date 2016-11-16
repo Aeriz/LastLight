@@ -93,7 +93,8 @@ public class EnemyScript : MonoBehaviour
 
     void checkEnemyInRange()
     {
-        Collider[] hitColliders = Physics.OverlapSphere(enemyWanderRange, aggroRange, 11);
+        int livingMask = 1 << 11;
+        Collider[] hitColliders = Physics.OverlapSphere(enemyWanderRange, aggroRange, livingMask);
         int i = 0;
         while (i<=hitColliders.Length)
         {
@@ -132,10 +133,8 @@ public class EnemyScript : MonoBehaviour
             {
                 EnemyScript enemy = hitColliders[i].GetComponent<EnemyScript>();
                 RaycastHit hit;
-                int layerMask = 1 << 10;
 
-                layerMask = ~layerMask;
-                if (Physics.Linecast(this.transform.position, hitColliders[i].transform.position, out hit, layerMask))
+                if (Physics.Linecast(this.transform.position, hitColliders[i].transform.position, out hit, livingMask))
                 {
                     if (hit.collider.tag == "Enemy")
                     {

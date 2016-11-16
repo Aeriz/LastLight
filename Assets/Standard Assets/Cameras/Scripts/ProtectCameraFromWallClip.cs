@@ -130,7 +130,14 @@ namespace UnityStandardAssets.Cameras
             protecting = hitSomething;
             m_CurrentDist = Mathf.SmoothDamp(m_CurrentDist, targetDist, ref m_MoveVelocity,
                                            m_CurrentDist > targetDist ? clipMoveTime : returnTime);
-            m_CurrentDist = Mathf.Clamp(m_CurrentDist, closestDistance, m_OriginalDist);
+            if (!lockedOn)
+            {
+                m_CurrentDist = Mathf.Clamp(m_CurrentDist, closestDistance, m_OriginalDist);
+            }
+            else
+            {
+                m_CurrentDist = Mathf.Clamp(m_CurrentDist, 3f, m_OriginalDist);
+            }
             m_Cam.localPosition = -Vector3.forward*m_CurrentDist;
         }
 
