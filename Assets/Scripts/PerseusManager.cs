@@ -19,8 +19,13 @@ public class PerseusManager : MonoBehaviour {
     public string[] flavourText;
     bool canFlavourText = false;
 
+    public GameObject puzzleComplete;
+    bool newText;
+
 	// Use this for initialization
 	void Start () {
+        puzzleComplete.SetActive(false);
+
         companionText.text = "";
 
         GameObject.Find("PuzzleYellow").GetComponent<Puzzle>().enabled = false;
@@ -41,11 +46,25 @@ public class PerseusManager : MonoBehaviour {
             if(puzzles[i].GetComponent<Puzzle>().puzzleComplete == true)
             {
                 puzzleCheck[i] = true;
+                if (newText)
+                {
+                    newText = false;
+                    Debug.Log("True");
+                    //puzzleComplete.SetActive(true);
+                    Invoke("ResetText", 3f);
+                }
             }
+        }
+
+        if (puzzleCheck[0])
+        {
+            newText = true;
         }
 
         if (puzzleCheck[1])
         {
+            newText = true;
+
             ThirdPersonUserControl tempControl = GameObject.Find("ThirdPersonController").GetComponent<ThirdPersonUserControl>();
             tempControl.canFloat = true;
 
@@ -55,17 +74,46 @@ public class PerseusManager : MonoBehaviour {
             }
         }
 
+        if (puzzleCheck[2])
+        {
+            newText = true;
+        }
+
+        if (puzzleCheck[3])
+        {
+            newText = true;
+        }
+
         if (puzzleCheck[4])
         {
+            newText = true;
+
             GameObject.Find("PuzzleYellow").GetComponent<Puzzle>().enabled = true;
+        }
+
+        if (puzzleCheck[5])
+        {
+            newText = true;
         }
 
         if (puzzleCheck[6])
         {
+            newText = true;
+
             foreach (GameObject i in rocksToExplode)
             {
                 i.GetComponent<Rigidbody>().isKinematic = false;
             }
+        }
+
+        if (puzzleCheck[7])
+        {
+            newText = true;
+        }
+
+        if (puzzleCheck[8])
+        {
+            newText = true;
         }
 
         if (canFlavourText)
@@ -103,5 +151,10 @@ public class PerseusManager : MonoBehaviour {
 
             canFlavourText = true;
         }
+    }
+
+    public void ResetText()
+    {
+        puzzleComplete.SetActive(false);
     }
 }

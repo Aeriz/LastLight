@@ -22,6 +22,7 @@ TagManager:
   - CourierQuest
   - TotalMirror
   - Terrain
+  - PuzzleCompleteText
   layers:
   - Default
   - TransparentFX

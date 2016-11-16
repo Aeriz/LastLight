@@ -254,31 +254,63 @@ namespace VolumetricLines
                 colour.a = 1;
             }
             lensColour = colour;
-            if (Physics.Raycast(temp.position, temp.right, out hit, Mathf.Infinity))
+            if (raySource.collider.tag == "LensOne")
             {
-                incidenceAngle = hit.point - raySource.point;
-                Debug.DrawRay(temp.position, incidenceAngle, Color.white);
-                tempLine.enabled = true;
-                tempLine.SetPosition(0, temp.position);
-                tempLine.SetPosition(1, hit.point);
-                tempBeam.changeColor(colour);
-                temp.transform.position = new Vector3(temp.transform.position.x, tempY, temp.transform.position.z);
-                //linesScripts[i].enabled = true;
-                //mesh[i].enabled = true;
-                //linesScripts[i].m_startPos = raySource.transform.position;
-                //linesScripts[i].m_endPos = hit.point;
-                //linesScripts[i].SetStartAndEndPoints(raySource.transform.position, hit.point);
-                reflectionAngle = Vector3.Reflect(incidenceAngle, hit.normal);
-                j++;
-                if (hit.transform.tag == "Mirror")
+                if (Physics.Raycast(temp.position, temp.right, out hit, Mathf.Infinity))
                 {
-                    MirrorRayTest(hit, j, colour);
+                    incidenceAngle = hit.point - raySource.point;
+                    Debug.DrawRay(temp.position, incidenceAngle, Color.white);
+                    tempLine.enabled = true;
+                    tempLine.SetPosition(0, temp.position);
+                    tempLine.SetPosition(1, hit.point);
+                    tempBeam.changeColor(colour);
+                    temp.transform.position = new Vector3(temp.transform.position.x, tempY, temp.transform.position.z);
+                    //linesScripts[i].enabled = true;
+                    //mesh[i].enabled = true;
+                    //linesScripts[i].m_startPos = raySource.transform.position;
+                    //linesScripts[i].m_endPos = hit.point;
+                    //linesScripts[i].SetStartAndEndPoints(raySource.transform.position, hit.point);
+                    reflectionAngle = Vector3.Reflect(incidenceAngle, hit.normal);
+                    j++;
+                    if (hit.transform.tag == "Mirror")
+                    {
+                        MirrorRayTest(hit, j, colour);
+                    }
+                    else if (hit.transform.tag == "PuzzleKey")
+                    {
+                        KeyRayTest(hit, j, colour);
+                    }
+                    return true;
                 }
-                else if (hit.transform.tag == "PuzzleKey")
+            }
+            else
+            {
+                if (Physics.Raycast(temp.position, -temp.right, out hit, Mathf.Infinity))
                 {
-                    KeyRayTest(hit, j, colour);
+                    incidenceAngle = hit.point - raySource.point;
+                    Debug.DrawRay(temp.position, incidenceAngle, Color.white);
+                    tempLine.enabled = true;
+                    tempLine.SetPosition(0, temp.position);
+                    tempLine.SetPosition(1, hit.point);
+                    tempBeam.changeColor(colour);
+                    temp.transform.position = new Vector3(temp.transform.position.x, tempY, temp.transform.position.z);
+                    //linesScripts[i].enabled = true;
+                    //mesh[i].enabled = true;
+                    //linesScripts[i].m_startPos = raySource.transform.position;
+                    //linesScripts[i].m_endPos = hit.point;
+                    //linesScripts[i].SetStartAndEndPoints(raySource.transform.position, hit.point);
+                    reflectionAngle = Vector3.Reflect(incidenceAngle, hit.normal);
+                    j++;
+                    if (hit.transform.tag == "Mirror")
+                    {
+                        MirrorRayTest(hit, j, colour);
+                    }
+                    else if (hit.transform.tag == "PuzzleKey")
+                    {
+                        KeyRayTest(hit, j, colour);
+                    }
+                    return true;
                 }
-                return true;
             }
 
             return false;
@@ -311,10 +343,7 @@ namespace VolumetricLines
             }
             
         }
-
     }
-
-
 }
 
 

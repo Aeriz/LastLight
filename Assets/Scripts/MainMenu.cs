@@ -5,6 +5,9 @@ public class MainMenu : MonoBehaviour {
 
 	public GameObject loadScreen;
 
+    public GameObject altStart;
+    public GameObject altExit;
+
 	// Use this for initialization
 	void Start () {
 		loadScreen.SetActive (false);
@@ -20,6 +23,16 @@ public class MainMenu : MonoBehaviour {
 		Application.LoadLevel (1);
 	}
 
+    public void NewGameEnter()
+    {
+        altStart.SetActive(true);
+    }
+
+    public void NewGameExit()
+    {
+        altStart.SetActive(false);
+    }
+
     public void LoadGame()
     {
         loadScreen.SetActive(true);
@@ -29,4 +42,14 @@ public class MainMenu : MonoBehaviour {
 	public void Exit () {
 		Application.Quit ();
 	}
+
+    public void ExitEnter()
+    {
+        altExit.SetActive(true);
+    }
+
+    public void ExitExit()
+    {
+        altExit.SetActive(false);
+    }
 }

@@ -11,9 +11,13 @@ public class PyxisReticulumManager : MonoBehaviour
 
     public bool resetTutorial;
 
+    //public GameObject puzzleComplete;
+
     // Use this for initialization
     void Start()
     {
+        Time.timeScale = 1;
+
         if (resetTutorial)
         {
             PlayerPrefs.SetInt("RunTutorial", 0);
