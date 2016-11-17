@@ -30,6 +30,7 @@ public class KeyScript : MonoBehaviour
                 unlock = true;
                 if (saveGameBool == false)
                 {
+                    Debug.Log("SAVE");
                     save.GameSave();
                     saveGameBool = true;
                 }

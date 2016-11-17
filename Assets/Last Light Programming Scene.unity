@@ -190,7 +190,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4000011649705116, guid: 085ccd7a0cb9558428437d3564a1e7fa, type: 2}
       propertyPath: m_LocalPosition.z
-      value: 5.41
+      value: 0.21
       objectReference: {fileID: 0}
     - target: {fileID: 4000011649705116, guid: 085ccd7a0cb9558428437d3564a1e7fa, type: 2}
       propertyPath: m_LocalRotation.x
@@ -215,6 +215,16 @@ Prefab:
     - target: {fileID: 1000012810240502, guid: 085ccd7a0cb9558428437d3564a1e7fa, type: 2}
       propertyPath: m_StaticEditorFlags
       value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000014203950388, guid: 085ccd7a0cb9558428437d3564a1e7fa,
+        type: 2}
+      propertyPath: color.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000014203950388, guid: 085ccd7a0cb9558428437d3564a1e7fa,
+        type: 2}
+      propertyPath: color.w
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 085ccd7a0cb9558428437d3564a1e7fa, type: 2}
@@ -391,6 +401,12 @@ Transform:
   m_PrefabParentObject: {fileID: 4000011272655148, guid: 2ec2f49bb70d3b14cb6a039c72ab052c,
     type: 2}
   m_PrefabInternal: {fileID: 1174348601}
+--- !u!114 &49819505 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 114000011165278202, guid: e83216d78404b6847b635b19539c839c,
+    type: 2}
+  m_PrefabInternal: {fileID: 1726653947}
+  m_Script: {fileID: 11500000, guid: 37e515afb1d7ce84fa9bed3473747629, type: 3}
 --- !u!1 &93332558
 GameObject:
   m_ObjectHideFlags: 0
@@ -1042,6 +1058,7 @@ MonoBehaviour:
   keyCheck: 0
   linePrefab: {fileID: 283421658}
   puzzleComplete: 0
+  puzzleCompleteText: 0
   lensColour1: {x: 0, y: 0, z: 0, w: 0}
   lensColour2: {x: 0, y: 0, z: 0, w: 0}
   lensColour: {x: 0, y: 0, z: 0, w: 0}
@@ -1723,7 +1740,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 19800000, guid: 876cb26c7c6ab42e49a9cace28b90b8b, type: 2}
       propertyPath: playOnAwake
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 19800000, guid: 876cb26c7c6ab42e49a9cace28b90b8b, type: 2}
       propertyPath: InitialModule.rotation3D
@@ -1939,6 +1956,7 @@ MonoBehaviour:
   keyCheck: 0
   linePrefab: {fileID: 1972939174}
   puzzleComplete: 0
+  puzzleCompleteText: 0
   lensColour1: {x: 0, y: 0, z: 0, w: 0}
   lensColour2: {x: 0, y: 0, z: 0, w: 0}
   lensColour: {x: 0, y: 0, z: 0, w: 0}
@@ -3119,6 +3137,7 @@ MonoBehaviour:
   keyCheck: 0
   linePrefab: {fileID: 26705613}
   puzzleComplete: 0
+  puzzleCompleteText: 0
   lensColour1: {x: 0, y: 0, z: 0, w: 0}
   lensColour2: {x: 0, y: 0, z: 0, w: 0}
   lensColour: {x: 0, y: 0, z: 0, w: 0}
@@ -3468,7 +3487,7 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4000012304222536, guid: 547d414ce0a634b41bb1e0cba22f394c, type: 2}
       propertyPath: m_LocalPosition.x
-      value: -1.4
+      value: 5.2
       objectReference: {fileID: 0}
     - target: {fileID: 4000012304222536, guid: 547d414ce0a634b41bb1e0cba22f394c, type: 2}
       propertyPath: m_LocalPosition.y
@@ -3476,7 +3495,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4000012304222536, guid: 547d414ce0a634b41bb1e0cba22f394c, type: 2}
       propertyPath: m_LocalPosition.z
-      value: 59
+      value: 19.3
       objectReference: {fileID: 0}
     - target: {fileID: 4000012304222536, guid: 547d414ce0a634b41bb1e0cba22f394c, type: 2}
       propertyPath: m_LocalRotation.x
@@ -3556,6 +3575,31 @@ Prefab:
       propertyPath: m_Layer
       value: 11
       objectReference: {fileID: 0}
+    - target: {fileID: 114000013793898878, guid: 547d414ce0a634b41bb1e0cba22f394c,
+        type: 2}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000013793898878, guid: 547d414ce0a634b41bb1e0cba22f394c,
+        type: 2}
+      propertyPath: distance
+      value: 40
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000013793898878, guid: 547d414ce0a634b41bb1e0cba22f394c,
+        type: 2}
+      propertyPath: radius
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000013793898878, guid: 547d414ce0a634b41bb1e0cba22f394c,
+        type: 2}
+      propertyPath: AOEdistance
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000013717369812, guid: 547d414ce0a634b41bb1e0cba22f394c,
+        type: 2}
+      propertyPath: load_save
+      value: 
+      objectReference: {fileID: 49819505}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 547d414ce0a634b41bb1e0cba22f394c, type: 2}
   m_IsPrefabParent: 0
@@ -3866,6 +3910,7 @@ MonoBehaviour:
   keyCheck: 0
   linePrefab: {fileID: 2089970692}
   puzzleComplete: 0
+  puzzleCompleteText: 0
   lensColour1: {x: 0, y: 0, z: 0, w: 0}
   lensColour2: {x: 0, y: 0, z: 0, w: 0}
   lensColour: {x: 0, y: 0, z: 0, w: 0}
@@ -4869,7 +4914,7 @@ GameObject:
   - 114: {fileID: 942908296}
   m_Layer: 0
   m_Name: Light Source (1)
-  m_TagString: Untagged
+  m_TagString: LightSource
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -6864,6 +6909,7 @@ MonoBehaviour:
   keyCheck: 0
   linePrefab: {fileID: 1972939174}
   puzzleComplete: 0
+  puzzleCompleteText: 0
   lensColour1: {x: 0, y: 0, z: 0, w: 0}
   lensColour2: {x: 0, y: 0, z: 0, w: 0}
   lensColour: {x: 0, y: 0, z: 0, w: 0}
@@ -7929,6 +7975,7 @@ MonoBehaviour:
   keyCheck: 0
   linePrefab: {fileID: 1648803377}
   puzzleComplete: 0
+  puzzleCompleteText: 0
   lensColour1: {x: 0, y: 0, z: 0, w: 0}
   lensColour2: {x: 0, y: 0, z: 0, w: 0}
   lensColour: {x: 0, y: 0, z: 0, w: 0}
@@ -8450,7 +8497,7 @@ GameObject:
   - 114: {fileID: 1494801204}
   m_Layer: 0
   m_Name: Light Source
-  m_TagString: Untagged
+  m_TagString: LightSource
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -9949,6 +9996,7 @@ MonoBehaviour:
   keyCheck: 0
   linePrefab: {fileID: 2054152565}
   puzzleComplete: 0
+  puzzleCompleteText: 0
   lensColour1: {x: 0, y: 0, z: 0, w: 0}
   lensColour2: {x: 0, y: 0, z: 0, w: 0}
   lensColour: {x: 0, y: 0, z: 0, w: 0}

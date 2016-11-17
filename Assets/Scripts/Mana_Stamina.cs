@@ -12,7 +12,7 @@ public class Mana_Stamina : MonoBehaviour
     public float baseMana = 100;
     public float currentMana;
     public Slider manaSlider;
-    ThirdPersonUserControl player;
+    public ThirdPersonUserControl player;
 
     // Use this for initialization
     void Start ()
@@ -23,13 +23,13 @@ public class Mana_Stamina : MonoBehaviour
     }
 	
 	// Update is called once per frame
-	void Update ()
+	void LateUpdate ()
     {
         staminaSlider.value = currentStamina;
         manaSlider.value = currentMana;
         if (currentStamina < baseStamina)
         {
-            currentStamina += Time.deltaTime;
+            currentStamina += Time.deltaTime * 4;
         }
         else if(currentStamina > baseStamina)
         {
@@ -38,7 +38,7 @@ public class Mana_Stamina : MonoBehaviour
 
         if (currentMana < baseMana)
         {
-            currentMana += Time.deltaTime / 2;
+            currentMana += Time.deltaTime * 2;
         }
         else if (currentMana > baseMana)
         {
@@ -49,6 +49,15 @@ public class Mana_Stamina : MonoBehaviour
         {
             useStamina(30);
             player.dashStamina = false;
+        }
+
+        if(currentStamina < 30)
+        {
+            player.canDash = false;
+        }
+        else if(currentStamina >= 30)
+        {
+            player.canDash = true;
         }
 
     }

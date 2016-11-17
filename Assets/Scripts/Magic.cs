@@ -13,7 +13,7 @@ public class Magic : MonoBehaviour
     public float radius = 7;
     public float distance = 10;
     public float AOEdistance = 5;
-    public float width;
+    public float width = 2;
     public GameObject lineObject;
     LineRenderer line;
     bool firing = false;
@@ -22,14 +22,14 @@ public class Magic : MonoBehaviour
     float expandTimer = 0;
     float shrinkTimer = 1;
     public float beamCoolDown = 0;
-    float AOECoolDown = 0;
+    public float AOECoolDown = 0;
 
     GameObject player;
     public GameObject camera;
     ThirdPersonUserControl thirdPersonScript;
     Mana_Stamina mana;
     GameObject AOEparticle;
-    float AOEtimer = 2.3f;
+    float AOEtimer = 1.3f;
     bool AOE;
     public ParticleSystem ps;
 
@@ -57,6 +57,7 @@ public class Magic : MonoBehaviour
     {
         if (characterActions.beamSpell.IsPressed && beamCoolDown <= 0 && (mana.currentMana - beamCost) >= 0)
         {
+            player.transform.rotation = new Quaternion(player.transform.rotation.x, camera.transform.rotation.y, player.transform.rotation.z, player.transform.rotation.w);
                 merge(mergeTime);
                 mana.useMana(beamCost);
                 thirdPersonScript.canPushMirror = true;
@@ -87,17 +88,21 @@ public class Magic : MonoBehaviour
         if(AOE)
         {
             AOEtimer -= Time.deltaTime;
-            ps.Play();
+            if (!ps.isPlaying)
+            {
+                mana.useMana(AOECost);
+                ps.Play();
+            }
 
             if(AOEtimer < 0)
             {
                 thirdPersonScript.canPushMirror = false;
-                ps.Pause();
+                ps.Stop();
                 ps.time = 0;
                 AOECoolDown = 5;
                 AOESpell();
                 AOE = false;
-                AOEtimer = 2.3f;
+                AOEtimer = 1.3f;
             }
         }
         if (AOECoolDown > 0)
@@ -134,7 +139,8 @@ public class Magic : MonoBehaviour
 
     void beamSpell()
     {
-        Collider[] hitColliders = Physics.OverlapSphere(transform.position, distance);
+        int livingMask = 1 << 11;
+        Collider[] hitColliders = Physics.OverlapSphere(transform.position, distance, livingMask);
         int i = 0;
         while (i < hitColliders.Length)
         {
@@ -156,7 +162,8 @@ public class Magic : MonoBehaviour
 
     void AOESpell()
     {
-        Collider[] hitColliders = Physics.OverlapSphere(transform.position, AOEdistance);
+        int livingMask = 1 << 11;
+        Collider[] hitColliders = Physics.OverlapSphere(transform.position, AOEdistance, livingMask);
         int i = 0;
         while (i < hitColliders.Length)
         {
