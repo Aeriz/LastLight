@@ -15,6 +15,7 @@ public class EnemyScript : MonoBehaviour
     float checkAggroTimer = 0;
     Health playerHealth;
     Mana_Stamina manaAndStamina;
+    Combat playerCombat;
     GameObject player;
     Rigidbody m_Rigidbody;
     NavMeshAgent nav;
@@ -41,6 +42,7 @@ public class EnemyScript : MonoBehaviour
         player = GameObject.FindGameObjectWithTag("Player");
         playerHealth = player.GetComponent<Health>();
         manaAndStamina = player.GetComponent<Mana_Stamina>();
+        playerCombat = player.GetComponent<Combat>();
         enemyWanderRange = m_Rigidbody.transform.position;
         //enemyHealth = GetComponent<EnemyHealth>();
 	}
@@ -61,8 +63,14 @@ public class EnemyScript : MonoBehaviour
         {
             attackTimer = 0.5f;
         }
-       if(!isDead)
-        checkEnemyInRange();
+        if (!isDead && !aggro)
+        {
+            checkEnemyInRange();
+        }
+        else if (aggro)
+        {
+            nav.SetDestination(player.transform.position);
+        }
          
 	    if(inRange)
         {
@@ -106,11 +114,12 @@ public class EnemyScript : MonoBehaviour
                 {
                     if (hit.collider.tag == "Player")
                     {
+                       
                         playerInRange = true;
                         aggro = true;
                         nav.enabled = true;
                         lastKnowPlayerLocation = hit.collider.transform.position;
-                        nav.SetDestination(lastKnowPlayerLocation);
+                        nav.SetDestination(player.transform.position);
                         break;
                     }
                     /*
@@ -140,6 +149,7 @@ public class EnemyScript : MonoBehaviour
                     {
                         if (enemy.aggro && enemy.playerInRange)
                         {
+                            
                             aggro = true;
                             nav.enabled = true;
                             lastKnowFriendlyLocation = hit.collider.transform.position;
@@ -169,11 +179,11 @@ public class EnemyScript : MonoBehaviour
         timer = 0;
         if (playerHealth.currenthealth > 0)
         {
-            if (playerBlocking == false)
+            if (!playerCombat.blocking)
             {
                 playerHealth.takeDamage(attackDamage);
             }
-            else
+            else if(playerCombat.blocking)
             {
                 manaAndStamina.useStamina(10);
             }

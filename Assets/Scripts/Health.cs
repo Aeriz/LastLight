@@ -15,6 +15,7 @@ public class Health : MonoBehaviour
     bool damaged;
     ThirdPersonCharacter playerMove;
     ThirdPersonUserControl playerControl;
+    public SaveGame load_save;
     
 
 	// Use this for initialization
@@ -22,6 +23,7 @@ public class Health : MonoBehaviour
     {
         playerMove = GetComponent<ThirdPersonCharacter>();
         playerControl = GetComponent<ThirdPersonUserControl>();
+
         currenthealth = baseHealth;
 	}
 	
@@ -55,10 +57,13 @@ public class Health : MonoBehaviour
 
     public void Death()
     {
+        load_save.LoadGame();
         //play death animation here
-        isDead = true;
+        //isDead = true;
+        /*
         playerControl.enabled = false;
         playerMove.enabled = false;
+        */
 
     }
 }

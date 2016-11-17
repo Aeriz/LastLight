@@ -1,11 +1,6 @@
 fileFormatVersion: 2
-<<<<<<< HEAD
-guid: f29bcdb45f89c7f4fadad13bcd13f4c3
-timeCreated: 1479352444
-=======
-guid: 9739dbfbae0c8c8468623a2718bf0dd5
-timeCreated: 1479358090
->>>>>>> d6e284d7ee88c08391a33771aad946fc76a6da65
+guid: fbd86b9214df8144da2f519663d2fe26
+timeCreated: 1479358462
 licenseType: Free
 ModelImporter:
   serializedVersion: 19
@@ -14,7 +9,7 @@ ModelImporter:
     400000: //RootNode
     2300000: //RootNode
     3300000: //RootNode
-    4300000: village_Wall_Side_FF_2
+    4300000: log_3
     9500000: //RootNode
   materials:
     importMaterials: 1

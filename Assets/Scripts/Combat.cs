@@ -17,9 +17,10 @@ public class Combat : MonoBehaviour {
     public bool heavy = false;
     public bool blocking = false;
     int j = 0;
-    Mana_Stamina stamina;
-	// Use this for initialization
-	void Start ()
+    public Mana_Stamina stamina;
+    public GameObject camera;
+    // Use this for initialization
+    void Start ()
     {
         stamina = GetComponent<Mana_Stamina>();
         characterActions = new MyCharacterActions();
@@ -59,10 +60,16 @@ public class Combat : MonoBehaviour {
                 HATimer = heavyAttackTimer;
             }
         }
+        /*
         if (characterActions.block.IsPressed && (stamina.currentStamina - 10) >= 0)
         {
-            blockDamage();
+           //transform.rotation = new Quaternion(transform.rotation.x, camera.transform.rotation.y, transform.rotation.z, transform.rotation.w);
+            //blockDamage();
             blocking = true;
+            if(stamina.currentStamina < 10)
+            {
+                blocking = false;
+            }
         }
         else if(characterActions.block.WasReleased || (stamina.currentStamina - 10) <= 0)
         {
@@ -74,6 +81,7 @@ public class Combat : MonoBehaviour {
             }
             blocking = false;
         }
+        */
     }
 
     void attackEnemies(int damage, float range)
@@ -117,9 +125,11 @@ public class Combat : MonoBehaviour {
         int i = 0;
         while(i < enemies.Length)
         {
+            
             EnemyScript enemy = enemies[i].GetComponent<EnemyScript>();
             if(enemy.aggro)
             {
+                /*
                 Vector3 targetDir = enemies[i].transform.position - transform.position;
                 float angle = Vector3.Angle(targetDir, transform.forward);
                 //dot = Vector3.Dot(hitColliders[i].transform.position, transform.TransformDirection(Vector3.forward));
@@ -135,7 +145,10 @@ public class Combat : MonoBehaviour {
                 {
                     enemy.playerBlocking = true;
                 }
+                */
+                enemy.playerBlocking = true;
             }
+            
             i++;
         }
     }
