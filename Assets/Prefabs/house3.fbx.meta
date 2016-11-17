@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: 9739dbfbae0c8c8468623a2718bf0dd5
-timeCreated: 1479358090
+guid: 76762da4a89593f43b1ed6d1cc17ca84
+timeCreated: 1479358095
 licenseType: Free
 ModelImporter:
   serializedVersion: 19
@@ -9,7 +9,7 @@ ModelImporter:
     400000: //RootNode
     2300000: //RootNode
     3300000: //RootNode
-    4300000: village_Wall_Side_FF_2
+    4300000: polySurface81
     9500000: //RootNode
   materials:
     importMaterials: 1

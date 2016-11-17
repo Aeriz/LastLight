@@ -23,9 +23,11 @@ namespace UnityStandardAssets.Characters.ThirdPerson
         public bool lockedOn = false;
         public bool dash = false;
         public bool dashStamina = false;
+        public bool canDash = true;
         public bool dashTimer = false;
         float timer = 0;
         public int dashCooldown = 1;
+        
         
 
 
@@ -128,7 +130,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
             if (Input.GetKey(KeyCode.LeftAlt)) m_Move *= 0.5f;
             if (Input.GetKey(KeyCode.LeftControl)) m_Move *= 0.7f;
 #endif
-            if (Input.GetKey(KeyCode.LeftShift) && m_Character.m_IsGrounded == true)
+            if (Input.GetKey(KeyCode.LeftShift) && m_Character.m_IsGrounded == true && canDash)
             {
                 if (!dashTimer)
                 {

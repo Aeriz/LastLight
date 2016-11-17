@@ -7,6 +7,8 @@ public class SaveGame : MonoBehaviour
 {
     public GameObject player;
     public GameObject[] mirrors;
+    public GameObject[] lights;
+    public GameObject[] enemies;
     public Transform[] loadedMirrors;
     MyCharacterActions characterActions;
     Health playerHealth;
@@ -16,6 +18,8 @@ public class SaveGame : MonoBehaviour
     {
         mirrors = GameObject.FindGameObjectsWithTag("MirrorPane");
         player = GameObject.FindGameObjectWithTag("Player");
+        lights = GameObject.FindGameObjectsWithTag("LightSource");
+        enemies = GameObject.FindGameObjectsWithTag("Enemy");
         playerHealth = player.GetComponent<Health>();
         characterActions = new MyCharacterActions();
         characterActions.save.AddDefaultBinding(Key.F1);
@@ -36,6 +40,12 @@ public class SaveGame : MonoBehaviour
                 ES2.Save(mirrors[i].transform.position, "myFile.txt?tag=mirrorP" + i);
                 ES2.Save(mirrors[i].transform.eulerAngles.y, "myFile.txt?tag=mirrorA" + i);
             }
+            for (int i = 0; i < lights.Length; i++)
+            {
+                ES2.Save(lights[i].transform.position, "myFile.txt?tag=mirrorP" + i);
+                ES2.Save(lights[i].transform.eulerAngles.y, "myFile.txt?tag=mirrorA" + i);
+            }
+
             /*
             PlayerPrefs.SetFloat("PlayerX", player.transform.position.x);
             PlayerPrefs.SetFloat("PlayerY", player.transform.position.y);
@@ -45,8 +55,14 @@ public class SaveGame : MonoBehaviour
         }
         if (characterActions.load.IsPressed)
         {
+            Application.LoadLevel(Application.loadedLevel);
             if (ES2.Exists("myFile"))
             {
+                for (int i = 0; i < enemies.Length; i++)
+                {
+                    EnemyScript enemy = enemies[i].GetComponent<EnemyScript>();
+                    enemy.aggro = false;
+                }
                 player.transform.position = ES2.Load<Vector3>("myFile.txt?tag=playerPosition");
                 playerHealth.currenthealth = ES2.Load<int>("myFile.txt?tag=playerHealth");
 
@@ -64,6 +80,14 @@ public class SaveGame : MonoBehaviour
                                 mirrors[j].transform.eulerAngles = new Vector3(0, angle, 0);
                             }
                         }
+                        for (int j = 0; j < lights.Length; j++)
+                        {
+                            if (lights[j].transform.position == pos)
+                            {
+                                lights[j].transform.eulerAngles = new Vector3(0, angle, 0);
+                            }
+                        }
+
                     }
                 }
             }
@@ -92,13 +116,25 @@ public class SaveGame : MonoBehaviour
             ES2.Save(mirrors[i].transform.position, "myFile.txt?tag=mirrorP" + i);
             ES2.Save(mirrors[i].transform.eulerAngles.y, "myFile.txt?tag=mirrorA" + i);
         }
+        for (int i = 0; i < lights.Length; i++)
+        {
+            ES2.Save(lights[i].transform.position, "myFile.txt?tag=mirrorP" + i);
+            ES2.Save(lights[i].transform.eulerAngles.y, "myFile.txt?tag=mirrorA" + i);
+        }
+   
     }
 
     public void LoadGame()
     {
+        Application.LoadLevel(Application.loadedLevel);
         if (ES2.Exists("myFile"))
         {
-            Debug.Log("LOAD");
+            for (int i = 0; i < enemies.Length; i++)
+            {
+                EnemyScript enemy = enemies[i].GetComponent<EnemyScript>();
+                enemy.aggro = false;
+            }
+
             player.transform.position = ES2.Load<Vector3>("myFile.txt?tag=playerPosition");
             playerHealth.currenthealth = ES2.Load<int>("myFile.txt?tag=playerHealth");
 
@@ -116,6 +152,14 @@ public class SaveGame : MonoBehaviour
                             mirrors[j].transform.eulerAngles = new Vector3(0, angle, 0);
                         }
                     }
+                    for (int j = 0; j < lights.Length; j++)
+                    {
+                        if (lights[j].transform.position == pos)
+                        {
+                            lights[j].transform.eulerAngles = new Vector3(0, angle, 0);
+                        }
+                    }
+
                 }
             }
         }
