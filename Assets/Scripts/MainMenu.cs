@@ -11,6 +11,7 @@ public class MainMenu : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		loadScreen.SetActive (false);
+        PlayerPrefs.SetInt("CollectableCounter", 0);
 	}
 	
 	// Update is called once per frame

@@ -21,7 +21,8 @@ namespace VolumetricLines
         Vector3 incidenceAngle;
         Vector3 reflectionAngle;
         public bool puzzleComplete = false;
-
+        public bool puzzleCompleteText = false;
+        private bool puzzleTextCheck = true;
 
         public Vector4 lensColour1;
         public Vector4 lensColour2;
@@ -89,6 +90,11 @@ namespace VolumetricLines
             if(keyCheck == keys.Length)
             {
                 puzzleComplete = true;
+                if (puzzleTextCheck)
+                {
+                    puzzleCompleteText = true;
+                    Invoke("ResetText", 3);
+                }
             }
             else
             {
@@ -342,6 +348,12 @@ namespace VolumetricLines
                 lines[i] = Instantiate(linePrefab);
             }
             
+        }
+
+        void ResetText()
+        {
+            puzzleCompleteText = false;
+            puzzleTextCheck = false;
         }
     }
 }

@@ -36,6 +36,8 @@ public class Collectables : MonoBehaviour {
     {
         if (col.gameObject.tag == "Collectable")
         {
+            PlayerPrefs.SetInt("CollectableCounter", PlayerPrefs.GetInt("CollectableCounter") + 1);
+
             col.gameObject.SetActive(false);
             gotCollectable = true;
             CamPan();
