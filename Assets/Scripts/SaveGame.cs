@@ -129,15 +129,12 @@ public class SaveGame : MonoBehaviour
         Application.LoadLevel(Application.loadedLevel);
         if (ES2.Exists("myFile"))
         {
-<<<<<<< HEAD
-            Debug.Log("LOAD");
-=======
             for (int i = 0; i < enemies.Length; i++)
             {
                 EnemyScript enemy = enemies[i].GetComponent<EnemyScript>();
                 enemy.aggro = false;
             }
->>>>>>> d6e284d7ee88c08391a33771aad946fc76a6da65
+
             player.transform.position = ES2.Load<Vector3>("myFile.txt?tag=playerPosition");
             playerHealth.currenthealth = ES2.Load<int>("myFile.txt?tag=playerHealth");
 
