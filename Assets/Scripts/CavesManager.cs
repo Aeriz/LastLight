@@ -18,14 +18,35 @@ public class CavesManager : MonoBehaviour {
     public GameObject puzzleCompleteText;
 
     public Light blueLight;
+
+    public Vector3 spawnLocOne;
+    public Vector3 spawnLocTwo;
+
+    public GameObject player;
+
+    public SaveGame load;
     // Use this for initialization
     void Start()
     {
+        if (PlayerPrefs.GetInt("CaveSpawn") == 1)
+        {
+            player.transform.position = spawnLocOne;
+        }
+        else if (PlayerPrefs.GetInt("CaveSpawn") == 2)
+        {
+            player.transform.position = spawnLocTwo;
+        }
+
+        GameObject.Find("PuzzleSeven").GetComponent<Puzzle>().enabled = false;
+        GameObject.Find("PuzzleEight").GetComponent<Puzzle>().enabled = false;
+
         puzzleCompleteText.SetActive(false);
 
         companionText.text = "";
 
         StartCoroutine("FlavourText", 60.0f);
+
+        load.GameSave();
     }
 
     // Update is called once per frame
@@ -58,6 +79,9 @@ public class CavesManager : MonoBehaviour {
             {
                 StartCoroutine("LightsOn", 5f);
             }
+
+            GameObject.Find("PuzzleSeven").GetComponent<Puzzle>().enabled = true;
+            GameObject.Find("PuzzleEight").GetComponent<Puzzle>().enabled = true;
         }
 
         if (puzzleCheck[1])

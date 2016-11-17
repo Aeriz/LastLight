@@ -21,13 +21,37 @@ public class PerseusManager : MonoBehaviour {
 
     public GameObject puzzleCompleteText;
 
-	// Use this for initialization
-	void Start () {
+    public Vector3 spawnLocOne;
+    public Vector3 spawnLocTwo;
+    public Vector3 spawnLocThree;
+
+    public GameObject player;
+
+    public SaveGame load;
+
+    // Use this for initialization
+    void Start () {
+
+        if (PlayerPrefs.GetInt("PerseusSpawn") == 1)
+        {
+            player.transform.position = spawnLocOne;
+        }
+        else if (PlayerPrefs.GetInt("PerseusSpawn") == 2)
+        {
+            player.transform.position = spawnLocTwo;
+        }
+        else if (PlayerPrefs.GetInt("PerseusSpawn") == 3)
+        {
+            player.transform.position = spawnLocTwo;
+        }
+
         puzzleCompleteText.SetActive(false);
 
         companionText.text = "";
 
         GameObject.Find("PuzzleYellow").GetComponent<Puzzle>().enabled = false;
+        GameObject.Find("PuzzleRed").GetComponent<Puzzle>().enabled = false;
+        GameObject.Find("PuzzleMagenta").GetComponent<Puzzle>().enabled = false;
 
         foreach (GameObject i in rocksToExplode)
         {
@@ -35,6 +59,8 @@ public class PerseusManager : MonoBehaviour {
         }
 
         StartCoroutine("FlavourText", 60.0f);
+
+        load.GameSave();
     }
 	
 	// Update is called once per frame
@@ -71,6 +97,7 @@ public class PerseusManager : MonoBehaviour {
 
         if (puzzleCheck[2])
         {
+            GameObject.Find("PuzzleMagenta").GetComponent<Puzzle>().enabled = true;
         }
 
         if (puzzleCheck[3])
@@ -101,6 +128,7 @@ public class PerseusManager : MonoBehaviour {
 
         if (puzzleCheck[8])
         {
+            GameObject.Find("PuzzleRed").GetComponent<Puzzle>().enabled = true;
         }
 
         if (canFlavourText)

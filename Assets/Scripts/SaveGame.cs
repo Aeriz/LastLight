@@ -82,6 +82,7 @@ public class SaveGame : MonoBehaviour
 
     public void GameSave()
     {
+        Debug.Log("SAVE");
         ES2.Save(transform, "myFile");
         ES2.Save(player.transform.position, "myFile.txt?tag=playerPosition");
         ES2.Save(playerHealth.currenthealth, "myFile.txt?tag=playerHealth");
@@ -97,6 +98,7 @@ public class SaveGame : MonoBehaviour
     {
         if (ES2.Exists("myFile"))
         {
+            Debug.Log("LOAD");
             player.transform.position = ES2.Load<Vector3>("myFile.txt?tag=playerPosition");
             playerHealth.currenthealth = ES2.Load<int>("myFile.txt?tag=playerHealth");
 

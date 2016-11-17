@@ -3,23 +3,28 @@ using System.Collections;
 
 public class PortalToPerseus : MonoBehaviour {
 
-    public GameObject loadScreen;
+    public int perseusSpawn;
+    public GameObject loadingScreen;
 
-	// Use this for initialization
-	void Start () {
-        loadScreen.SetActive(false);
+    // Use this for initialization
+    void Start()
+    {
+        loadingScreen.SetActive(false);
     }
 
     // Update is called once per frame
-    void Update () {
-	
-	}
+    void Update()
+    {
+
+    }
 
     void OnTriggerEnter(Collider col)
     {
         if (col.gameObject.tag == "Player")
         {
-            loadScreen.SetActive(true);
+            loadingScreen.SetActive(true);
+            PlayerPrefs.SetInt("PerseusSpawn", perseusSpawn);
+            //loadingScreen.SetActive(true);
             Application.LoadLevel(2);
         }
     }
