@@ -42,7 +42,13 @@ public class PerseusManager : MonoBehaviour {
         }
         else if (PlayerPrefs.GetInt("PerseusSpawn") == 3)
         {
-            player.transform.position = spawnLocTwo;
+            player.transform.position = spawnLocThree;
+        }
+
+        if (PlayerPrefs.GetInt("CanGlide") == 1)
+        {
+            ThirdPersonUserControl tempControl = GameObject.Find("ThirdPersonController").GetComponent<ThirdPersonUserControl>();
+            tempControl.canFloat = true;
         }
 
         puzzleCompleteText.SetActive(false);
@@ -86,6 +92,7 @@ public class PerseusManager : MonoBehaviour {
 
         if (puzzleCheck[1])
         {
+            PlayerPrefs.SetInt("CanGlide", 1);
             ThirdPersonUserControl tempControl = GameObject.Find("ThirdPersonController").GetComponent<ThirdPersonUserControl>();
             tempControl.canFloat = true;
 

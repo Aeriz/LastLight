@@ -31,10 +31,13 @@ public class EnemyScript : MonoBehaviour
     CapsuleCollider capsule;
     public bool damaged;
 
+    Animator anim;
+
     //EnemyHealth enemyHealth;
     // Use this for initialization
     void Start ()
     {
+        anim = GetComponent<Animator>();
         capsule = GetComponent<CapsuleCollider>();
         nav = GetComponent<NavMeshAgent>();
         m_Rigidbody = GetComponent<Rigidbody>();
@@ -45,6 +48,8 @@ public class EnemyScript : MonoBehaviour
         playerCombat = player.GetComponent<Combat>();
         enemyWanderRange = m_Rigidbody.transform.position;
         //enemyHealth = GetComponent<EnemyHealth>();
+
+        anim.SetBool("moving", true);
 	}
 	
 	// Update is called once per frame
@@ -114,7 +119,6 @@ public class EnemyScript : MonoBehaviour
                 {
                     if (hit.collider.tag == "Player")
                     {
-                       
                         playerInRange = true;
                         aggro = true;
                         nav.enabled = true;
@@ -149,7 +153,6 @@ public class EnemyScript : MonoBehaviour
                     {
                         if (enemy.aggro && enemy.playerInRange)
                         {
-                            
                             aggro = true;
                             nav.enabled = true;
                             lastKnowFriendlyLocation = hit.collider.transform.position;
@@ -176,9 +179,11 @@ public class EnemyScript : MonoBehaviour
 
     void attack()
     {
+        anim.SetBool("attacking", true);
+
         timer = 0;
         if (playerHealth.currenthealth > 0)
-        {
+        {           
             if (!playerCombat.blocking)
             {
                 playerHealth.takeDamage(attackDamage);
@@ -228,7 +233,7 @@ public class EnemyScript : MonoBehaviour
             QuestManager.questTracker[0] += 1;
         }
         capsule.enabled = false;
-        //play death animation here
+        anim.SetBool("death", true);
         nav.enabled = false;
         isDead = true;
         m_Rigidbody.isKinematic = false;

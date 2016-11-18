@@ -37,6 +37,12 @@ public class CavesManager : MonoBehaviour {
             player.transform.position = spawnLocTwo;
         }
 
+        if (PlayerPrefs.GetInt("CanGlide") == 1)
+        {
+            ThirdPersonUserControl tempControl = GameObject.Find("ThirdPersonController").GetComponent<ThirdPersonUserControl>();
+            tempControl.canFloat = true;
+        }
+
         GameObject.Find("PuzzleSeven").GetComponent<Puzzle>().enabled = false;
         GameObject.Find("PuzzleEight").GetComponent<Puzzle>().enabled = false;
 

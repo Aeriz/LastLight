@@ -2,6 +2,7 @@
 using UnityEngine.UI;
 using System.Collections;
 using VolumetricLines;
+using UnityStandardAssets.Characters.ThirdPerson;
 
 public class PyxisReticulumManager : MonoBehaviour
 {
@@ -31,7 +32,13 @@ public class PyxisReticulumManager : MonoBehaviour
         if (PlayerPrefs.GetInt("RunTutorial") == 0)
         {
             StartCoroutine("Companion", 5.0f);
-        }      
+        }
+
+        if (PlayerPrefs.GetInt("CanGlide") == 1)
+        {
+            ThirdPersonUserControl tempControl = GameObject.Find("ThirdPersonController").GetComponent<ThirdPersonUserControl>();
+            tempControl.canFloat = true;
+        }
     }
 
     // Update is called once per frame

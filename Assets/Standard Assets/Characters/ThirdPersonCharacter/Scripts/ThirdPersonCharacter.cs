@@ -52,8 +52,11 @@ namespace UnityStandardAssets.Characters.ThirdPerson
         public Vector3 gravity;
         public Vector3 velocity;
 
+        public Animator anim;
+
         void Start()
         {
+            //anim = GameObject.Find("PlayerCharacter").GetComponent<Animator>();
             m_Animator = GetComponent<Animator>();
             m_Rigidbody = GetComponent<Rigidbody>();
             m_Capsule = GetComponent<CapsuleCollider>();
@@ -76,6 +79,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 
         public void Move(Vector3 move, bool crouch, int jump, bool _dash, bool _float)
         {
+            
             m_move = move;
             Vector3 temp = move;
             //Debug.Log(m_Rigidbody.velocity);
@@ -167,6 +171,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
             m_Animator.SetFloat("Turn", m_TurnAmount, 0.1f, Time.deltaTime);
             m_Animator.SetBool("Crouch", m_Crouching);
             m_Animator.SetBool("OnGround", m_IsGrounded);
+            
             if (!m_IsGrounded)
             {
                 m_Animator.SetFloat("Jump", m_Rigidbody.velocity.y);
@@ -182,6 +187,30 @@ namespace UnityStandardAssets.Characters.ThirdPerson
             if (m_IsGrounded)
             {
                 m_Animator.SetFloat("JumpLeg", jumpLeg);
+                
+            }
+
+            if (m_IsGrounded == true)
+            {
+                anim.SetBool("falling", false);
+                if (Input.GetKeyDown(KeyCode.LeftShift))
+                {
+                    anim.SetBool("rolling", true);
+                    Invoke("ResetRoll", 0.5f);
+                }
+            }
+            if (m_IsGrounded == false)
+            {
+                anim.SetBool("falling", true);
+            }
+
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                anim.SetBool("jumping", true);
+            }
+            else
+            {
+                anim.SetBool("jumping", false);
             }
 
             // the anim speed multiplier allows the overall speed of walking/running to be tweaked in the inspector,
@@ -189,11 +218,13 @@ namespace UnityStandardAssets.Characters.ThirdPerson
             if (m_IsGrounded && move.magnitude > 0)
             {
                 m_Animator.speed = m_AnimSpeedMultiplier;
+                anim.SetBool("running", true);
             }
             else
             {
                 // don't use that while airborne
                 m_Animator.speed = 1;
+                anim.SetBool("running", false);
             }
         }
 
@@ -298,6 +329,10 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 
         }
 
+        void ResetRoll()
+        {
+            anim.SetBool("rolling", false);
+        }
 
         void CheckGroundStatus()
         {

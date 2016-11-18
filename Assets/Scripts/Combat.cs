@@ -19,6 +19,7 @@ public class Combat : MonoBehaviour {
     int j = 0;
     public Mana_Stamina stamina;
     public GameObject camera;
+    public Animator anim;
     // Use this for initialization
     void Start ()
     {
@@ -34,11 +35,16 @@ public class Combat : MonoBehaviour {
     {
         if (characterActions.lightAttack.IsPressed && !light)
         {
+            anim.SetBool("attacking", true);
+            Invoke("ResetAttack", 1f);
             light = true;
             attackEnemies(lightAttack, 0.5f);
         }
         if (characterActions.heavyAttack.IsPressed && !heavy)
         {
+            anim.SetBool("attacking", true);
+            Invoke("ResetAttack", 1f);
+            
             heavy = true;
             attackEnemies(heavyAttack, 0.5f);
         }
@@ -49,6 +55,7 @@ public class Combat : MonoBehaviour {
             {
                 light = false;
                 LATimer = lightAttackTimer;
+                
             }
         }
         if (heavy)
@@ -58,6 +65,7 @@ public class Combat : MonoBehaviour {
             {
                 heavy = false;
                 HATimer = heavyAttackTimer;
+                
             }
         }
         /*
@@ -151,5 +159,10 @@ public class Combat : MonoBehaviour {
             
             i++;
         }
+    }
+
+    void ResetAttack()
+    {
+        anim.SetBool("attacking", false);
     }
 }
