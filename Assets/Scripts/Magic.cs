@@ -5,7 +5,6 @@ using UnityStandardAssets.Characters.ThirdPerson;
 
 public class Magic : MonoBehaviour
 {
-    MyCharacterActions characterActions;
     public int beamAttack = 100;
     public int AOEAttack = 20;
     public float beamCost = 50;
@@ -35,6 +34,7 @@ public class Magic : MonoBehaviour
 
     float mergeTime = 5;
 
+    public MyCharacterActions characterActions;
 
     // Use this for initialization
     void Start()
@@ -55,9 +55,9 @@ public class Magic : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (characterActions.beamSpell.IsPressed && beamCoolDown <= 0 && (mana.currentMana - beamCost) >= 0)
+        if (characterActions.beamSpell.IsPressed && beamCoolDown <= 0 && (mana.currentMana - beamCost) >= 0 && !firing)
         {
-            player.transform.rotation = new Quaternion(player.transform.rotation.x, camera.transform.rotation.y, player.transform.rotation.z, player.transform.rotation.w);
+                player.transform.rotation = new Quaternion(player.transform.rotation.x, camera.transform.rotation.y, player.transform.rotation.z, player.transform.rotation.w);
                 merge(mergeTime);
                 mana.useMana(beamCost);
                 thirdPersonScript.canPushMirror = true;

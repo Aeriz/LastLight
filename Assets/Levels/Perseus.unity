@@ -1490,7 +1490,7 @@ Transform:
     type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 113450357}
-  m_LocalRotation: {x: 0.53267515, y: 0.07034045, z: 0.83613265, w: -0.11041513}
+  m_LocalRotation: {x: 0.5326752, y: 0.070340455, z: 0.83613276, w: -0.110415146}
   m_LocalPosition: {x: 0.000022239758, y: -0.00006150279, z: 0.026027033}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -14701,7 +14701,6 @@ GameObject:
   - 114: {fileID: 2086199442}
   - 114: {fileID: 934574852}
   - 114: {fileID: 934574851}
-  - 114: {fileID: 934574850}
   - 114: {fileID: 934574849}
   m_Layer: 11
   m_Name: ThirdPersonController
@@ -14717,7 +14716,7 @@ MonoBehaviour:
     type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 934574848}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 93bb7fdb31a284a49818180e8b677327, type: 3}
   m_Name: 
@@ -14729,31 +14728,6 @@ MonoBehaviour:
   currentMana: 0
   manaSlider: {fileID: 0}
   player: {fileID: 0}
---- !u!114 &934574850
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 114000013472478978, guid: 547d414ce0a634b41bb1e0cba22f394c,
-    type: 2}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 934574848}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 87b6b7bd33f9a6a46bba72ef8791364c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  beamAttack: 100
-  AOEAttack: 20
-  beamCost: 50
-  AOECost: 30
-  radius: 7
-  distance: 10
-  AOEdistance: 5
-  width: 0
-  lineObject: {fileID: 827043705}
-  beamCoolDown: 0
-  AOECoolDown: 0
-  camera: {fileID: 0}
-  ps: {fileID: 0}
 --- !u!114 &934574851
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14801,7 +14775,7 @@ MonoBehaviour:
     type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 934574848}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 87b6b7bd33f9a6a46bba72ef8791364c, type: 3}
   m_Name: 
