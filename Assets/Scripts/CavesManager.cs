@@ -81,7 +81,7 @@ public class CavesManager : MonoBehaviour {
                 blueLight.intensity += 0.01f;
             }
 
-            if (lightsOnText == false)
+            if (PlayerPrefs.GetInt("LightsOnTextDone") == 0)
             {
                 StartCoroutine("LightsOn", 5f);
             }
@@ -124,7 +124,7 @@ public class CavesManager : MonoBehaviour {
 
     IEnumerator LightsOn(float waitTime)
     {
-        lightsOnText = true;
+        PlayerPrefs.SetInt("LightsOnTextDone", 1);
         storyElementText = true;
 
         companionText.text = "";

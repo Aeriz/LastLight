@@ -13,7 +13,6 @@ public class PerseusManager : MonoBehaviour {
 
     public Text companionText;
 
-    static bool glideTextDone = false;
     bool storyElementText = false;
 
     public string[] flavourText;
@@ -96,7 +95,7 @@ public class PerseusManager : MonoBehaviour {
             ThirdPersonUserControl tempControl = GameObject.Find("ThirdPersonController").GetComponent<ThirdPersonUserControl>();
             tempControl.canFloat = true;
 
-            if (glideTextDone == false)
+            if (PlayerPrefs.GetInt("GlideTextDone") == 0)
             {
                 StartCoroutine("GlideUnlocked", 5.0f);
             }
@@ -147,7 +146,7 @@ public class PerseusManager : MonoBehaviour {
     IEnumerator GlideUnlocked(float waitTime)
     {
         storyElementText = true;
-        glideTextDone = true;
+        PlayerPrefs.SetInt("GlideTextDone", 1);
 
         companionText.text = "";
         companionText.text = "Fantastic! With the completion of this puzzle \n you have been granted wings of flight.";
