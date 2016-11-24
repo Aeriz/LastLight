@@ -118,9 +118,7 @@ public class QuestManager : MonoBehaviour {
     {
         if (col.gameObject.tag == questGiver[0] || col.gameObject.tag == questGiver[1] || col.gameObject.tag == questGiver[2])
         {
-            questSpeech.gameObject.SetActive(false);
-            questAccept.gameObject.SetActive(false);
-            Cursor.visible = false;
+            Invoke("CloseQuest", 3f);
         }
     }
 
@@ -140,5 +138,12 @@ public class QuestManager : MonoBehaviour {
     public void Reset()
     {
         questSpeech.gameObject.SetActive(false);
+    }
+
+    public void CloseQuest()
+    {
+        questSpeech.gameObject.SetActive(false);
+        questAccept.gameObject.SetActive(false);
+        Cursor.visible = false;
     }
 }

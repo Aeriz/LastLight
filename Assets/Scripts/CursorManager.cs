@@ -7,8 +7,12 @@ public class CursorManager : MonoBehaviour {
     public GameObject altStart;
     public GameObject altExit;
 
+    CursorLockMode wantedMode;
+
     // Use this for initialization
     void Start() {
+        Cursor.lockState = CursorLockMode.Locked;
+
         altStart.SetActive(false);
         altExit.SetActive(false);
 
@@ -25,6 +29,12 @@ public class CursorManager : MonoBehaviour {
             Time.timeScale = 1 - Time.timeScale;
             pauseMenu.gameObject.SetActive(true);
             Cursor.visible = true;
+            Cursor.lockState = CursorLockMode.Confined;
+        }
+
+        if (Input.GetKeyDown(KeyCode.Z))
+        {
+            PlayerPrefs.DeleteAll();
         }
     }
 
@@ -33,6 +43,7 @@ public class CursorManager : MonoBehaviour {
         Time.timeScale = 1;
         pauseMenu.gameObject.SetActive(false);
         Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
     }
 
     public void Exit()

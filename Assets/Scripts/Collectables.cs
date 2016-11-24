@@ -11,6 +11,7 @@ public class Collectables : MonoBehaviour {
     public Transform focusPoint;
 
     public static bool gotCollectable;
+    public static bool canCollect;
 
     // Use this for initialization
     void Start () {
@@ -18,6 +19,7 @@ public class Collectables : MonoBehaviour {
         panCam.gameObject.SetActive(false);
         playerCam.gameObject.SetActive(true);
 
+        canCollect = true;
     }
 	
 	// Update is called once per frame
@@ -36,7 +38,11 @@ public class Collectables : MonoBehaviour {
     {
         if (col.gameObject.tag == "Collectable")
         {
-            PlayerPrefs.SetInt("CollectableCounter", PlayerPrefs.GetInt("CollectableCounter") + 1);
+            if (canCollect)
+            {
+                PlayerPrefs.SetInt("CollectableCounter", PlayerPrefs.GetInt("CollectableCounter") + 1);
+            }
+            canCollect = false;
 
             col.gameObject.SetActive(false);
             gotCollectable = true;
@@ -68,6 +74,8 @@ public class Collectables : MonoBehaviour {
 
     void Reset()
     {
+        canCollect = true;
+
         GameObject.Find("ThirdPersonController").GetComponent<Rigidbody>().isKinematic = false;
         ThirdPersonUserControl playerControl = GameObject.Find("ThirdPersonController").GetComponent<ThirdPersonUserControl>();
         ThirdPersonCharacter playerMove = GameObject.Find("ThirdPersonController").GetComponent<ThirdPersonCharacter>();
