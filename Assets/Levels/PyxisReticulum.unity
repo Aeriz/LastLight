@@ -3796,6 +3796,11 @@ Prefab:
       propertyPath: manaSlider
       value: 
       objectReference: {fileID: 764564920}
+    - target: {fileID: 114000013585607432, guid: 547d414ce0a634b41bb1e0cba22f394c,
+        type: 2}
+      propertyPath: devMode
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 114000013472478978, guid: 547d414ce0a634b41bb1e0cba22f394c, type: 2}
     - {fileID: 114000011885361382, guid: 547d414ce0a634b41bb1e0cba22f394c, type: 2}

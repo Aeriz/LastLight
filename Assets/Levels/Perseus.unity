@@ -12046,6 +12046,10 @@ Prefab:
       propertyPath: m_LocalEulerAnglesHint.y
       value: 201.659
       objectReference: {fileID: 0}
+    - target: {fileID: 1000012892463170, guid: 9674284b148a7e44aace203965c0758f, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 9674284b148a7e44aace203965c0758f, type: 2}
   m_IsPrefabParent: 0
@@ -12870,6 +12874,10 @@ Prefab:
     - target: {fileID: 4000011118313726, guid: 9674284b148a7e44aace203965c0758f, type: 2}
       propertyPath: m_LocalEulerAnglesHint.y
       value: -90.25001
+      objectReference: {fileID: 0}
+    - target: {fileID: 1000012892463170, guid: 9674284b148a7e44aace203965c0758f, type: 2}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 9674284b148a7e44aace203965c0758f, type: 2}
@@ -25630,6 +25638,10 @@ Prefab:
       propertyPath: m_TagString
       value: KillQuest
       objectReference: {fileID: 0}
+    - target: {fileID: 1000012892463170, guid: 9674284b148a7e44aace203965c0758f, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 9674284b148a7e44aace203965c0758f, type: 2}
   m_IsPrefabParent: 0
@@ -26996,7 +27008,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4000011241892026, guid: 1179c319efbfb0043b233dec774546ce, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 10
+      value: -5
       objectReference: {fileID: 0}
     - target: {fileID: 4000011241892026, guid: 1179c319efbfb0043b233dec774546ce, type: 2}
       propertyPath: m_LocalPosition.z
